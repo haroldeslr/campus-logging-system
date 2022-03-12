@@ -1,20 +1,29 @@
 <?php 
 
-/*
-Server: sql6.freemysqlhosting.net
-Name: sql6477119
-Username: sql6477119
-Password: 2vCwuT3g4f
-Port number: 3306
-*/
 
-$servername = "sql6.freemysqlhosting.net";
-$username = "sql6477119";
-$password = "2vCwuT3g4f";
-$dbname = "sql6477119";
+// db configuration for live database
+// $servername = "localhost";
+// $username = "id18567046_admin1";
+// $password = "9(8y6IUdW]RJ&DX1";
+// $dbname = "id18567046_campus_logging_system_db";
+
+// db configuration for local database / development and testing mode
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "visitors_log_db";
+
+
+// use local database config for development and testing
+// dont use db config of live database for testing
+$servername = "localhost";
+$username = "id18567046_admin1";
+$password = "9(8y6IUdW]RJ&DX1";
+$dbname = "id18567046_campus_logging_system_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);

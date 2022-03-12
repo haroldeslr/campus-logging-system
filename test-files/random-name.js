@@ -3033,7 +3033,7 @@ function generateTime() {
   return currentDate;
 }
 
-$("#add-log-button").click(function () {
+function addLog() {
   let fullname = generateName();
   let age = generateAge();
   let gender = generateGender();
@@ -3066,4 +3066,10 @@ $("#add-log-button").click(function () {
       }
     },
   });
+}
+
+$("#add-log-button").click(function () {
+  for (let i = 1; i <= 100; i++) {
+    addLog();
+  }
 });
