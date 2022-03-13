@@ -1,6 +1,5 @@
 <?php 
 
-
 // db configuration for live database
 // $servername = "localhost";
 // $username = "id18567046_admin1";
@@ -11,8 +10,7 @@
 // $servername = "localhost";
 // $username = "root";
 // $password = "";
-// $dbname = "visitors_log_db";
-
+// $dbname = "campus_logging_system_db
 
 // use local database config for development and testing
 // dont use db config of live database for testing

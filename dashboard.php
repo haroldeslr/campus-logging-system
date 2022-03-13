@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Account Settings | Campus Logging System</title>
+    <title>Dashboard | Campus Logging System</title>
 
     <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="vendor/chartsjs/Chart.min.css" rel="stylesheet" />
     <link href="css/master.css" rel="stylesheet" />
   </head>
   <body>
@@ -20,18 +21,18 @@
         </div>
         <ul class="list-unstyled components text-secondary">
           <li>
-            <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
           </li>
           <li>
-            <a href="logbook.html"><i class="fas fa-file-alt"></i> Logbook</a>
+            <a href="logbook.php"><i class="fas fa-file-alt"></i> Logbook</a>
           </li>
           <li>
-            <a href="announcement.html"
+            <a href="announcement.php"
               ><i class="fas fa-bullhorn"></i> Announcements</a
             >
           </li>
           <li>
-            <a href="account-settings.html"
+            <a href="account-settings.php"
               ><i class="fas fa-user"></i> Account Settings</a
             >
           </li>
@@ -79,65 +80,41 @@
         <div class="content">
           <div class="container-fluid">
             <div class="page-title">
-              <h3>Account Settings</h3>
+              <h3>Dashboard</h3>
             </div>
             <div class="row">
-              <div class="col-md-6 offset-md-3">
-                <div class="card card-outline-secondary">
-                  <div class="card-header">
-                    <h3 class="mb-0">Change Password</h3>
-                  </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">Daily Logs Chart</div>
                   <div class="card-body">
-                    <form class="form" role="form" autocomplete="off">
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordOld"
-                          >Current Password</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordOld"
-                          required=""
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordNew"
-                          >New Password</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordNew"
-                          required=""
-                        />
-                        <span class="form-text small text-muted">
-                          The password must be 8-20 characters, and must
-                          <em>not</em> contain spaces.
-                        </span>
-                      </div>
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordNewVerify"
-                          >Verify</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordNewVerify"
-                          required=""
-                        />
-                        <span class="form-text small text-muted">
-                          To confirm, type the new password again.
-                        </span>
-                      </div>
-                      <div class="d-md-flex justify-content-md-end mb-3">
-                        <button
-                          type="submit"
-                          class="btn btn-success btn-lg float-right"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </form>
+                    <p class="card-title"></p>
+                    <div class="canvas-wrapper">
+                      <canvas class="daily-logs-chart chart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">Monthly Logs Chart</div>
+                  <div class="card-body">
+                    <p class="card-title"></p>
+                    <div class="canvas-wrapper">
+                      <canvas class="monthly-logs-chart chart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">Yearly Logs Chart</div>
+                  <div class="card-body">
+                    <p class="card-title"></p>
+                    <div class="canvas-wrapper">
+                      <canvas class="yearly-logs-chart chart"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,7 +128,8 @@
     <script src="vendor/bootstrap4/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/fontawesome5/solid.min.js"></script>
     <script src="vendor/fontawesome5/fontawesome.min.js"></script>
-    <script src="js/account-settings.js"></script>
+    <script src="vendor/chartsjs/Chart.min.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

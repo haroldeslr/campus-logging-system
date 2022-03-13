@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Logbook | Campus Logging System</title>
+    <title>Announcements | Campus Logging System</title>
 
     <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet" />
     <link href="vendor/DataTables/datatables.min.css" rel="stylesheet" />
@@ -21,18 +21,18 @@
         </div>
         <ul class="list-unstyled components text-secondary">
           <li>
-            <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
           </li>
           <li>
-            <a href="logbook.html"><i class="fas fa-file-alt"></i> Logbook</a>
+            <a href="logbook.php"><i class="fas fa-file-alt"></i> Logbook</a>
           </li>
           <li>
-            <a href="announcement.html"
+            <a href="announcement.php"
               ><i class="fas fa-bullhorn"></i> Announcements</a
             >
           </li>
           <li>
-            <a href="account-settings.html"
+            <a href="account-settings.php"
               ><i class="fas fa-user"></i> Account Settings</a
             >
           </li>
@@ -81,36 +81,32 @@
           <div class="container-fluid">
             <div class="page-title">
               <h3>
-                Logbook
-                <!-- <a
-                  id="add-log-button"
+                Announcements
+                <a
                   href="#"
                   class="btn btn-sm btn-outline-primary float-right"
-                  ><i class="fas fa-file-alt"></i> Add Log</a
-                > -->
+                  data-toggle="modal"
+                  data-target="#add-announcement-modal"
+                  ><i class="fas fa-bullhorn"></i> Add</a
+                >
               </h3>
             </div>
             <div class="row">
               <div class="col-md-12 col-lg-12">
                 <div class="card">
-                  <div class="card-header">Logbook Table</div>
+                  <div class="card-header">Announcements Table</div>
                   <div class="card-body">
                     <p class="card-title"></p>
                     <table
                       class="table table-hover"
-                      id="logbook-table"
+                      id="announcement-table"
                       width="100%"
                     >
                       <thead>
                         <tr>
-                          <th>Full Name</th>
-                          <th>Contact Number</th>
-                          <th>Address</th>
-                          <th>Age</th>
-                          <th>Temperature</th>
-                          <th>Gender</th>
-                          <th>Reason</th>
-                          <th>Time</th>
+                          <th>Date</th>
+                          <th>Title</th>
+                          <th>Message</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -125,18 +121,84 @@
       </div>
     </div>
 
-    <!-- Modal for edit log record -->
+    <!-- add announcement modal -->
     <div
       class="modal fade"
-      id="edit-log-modal"
+      id="add-announcement-modal"
       tabindex="-1"
-      aria-labelledby="edit-log-modalLabel"
+      aria-labelledby="add-announcement-modalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Edit Log Record</h5>
+            <h5 class="modal-title">Add Announcements</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="date-input" class="col-form-label">Date:</label>
+                <input
+                  id="date-input"
+                  type="text"
+                  class="form-control"
+                  name="date-input"
+                />
+              </div>
+              <div class="form-group">
+                <label for="title-input" class="col-form-label">Title:</label>
+                <input
+                  id="title-input"
+                  type="text"
+                  class="form-control"
+                  name="title-input"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message-text-input" class="col-form-label"
+                  >Message:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="message-text-input"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              id="add-new-announcement-button"
+              type="button"
+              class="btn btn-primary"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add announcement modal -->
+
+    <!-- edit announcement modal -->
+    <div
+      class="modal fade"
+      id="edit-announcement-modal"
+      tabindex="-1"
+      aria-labelledby="edit-announcement-modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Announcement</h5>
             <button
               type="button"
               class="close"
@@ -149,102 +211,58 @@
           <div class="modal-body">
             <form>
               <input id="edited-id" name="edited-id" type="hidden" />
-              <input id="edited-time" name="edited-time" type="hidden" />
               <div class="form-group">
-                <label for="fullname" class="col-form-label">Full Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="edited-fullname"
-                  id="edited-fullname"
-                />
-              </div>
-              <div class="form-group">
-                <label for="Age" class="col-form-label">Age</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="edited-age"
-                  name="edited-age"
-                />
-              </div>
-              <div class="form-group">
-                <label for="Age" class="col-form-label">Gender</label>
-                <select
-                  class="custom-select"
-                  aria-label=".form-select-lg example"
-                  name="edited-gender"
-                  id="edited-gender"
+                <label for="edit-date-input" class="col-form-label"
+                  >Date:</label
                 >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="Age" class="col-form-label">Address</label>
                 <input
+                  id="edit-date-input"
                   type="text"
                   class="form-control"
-                  id="edited-address"
-                  name="edited-address"
+                  name="edit-date-input"
                 />
               </div>
               <div class="form-group">
-                <label for="Age" class="col-form-label">Contact Number</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="edited-contactnumber"
-                  name="edited-contactnumber"
-                />
-              </div>
-              <div class="form-group">
-                <label for="Age" class="col-form-label">Temperature</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="edited-temp"
-                  name="edited-temp"
-                />
-              </div>
-              <div class="form-group">
-                <label for="Age" class="col-form-label">Reason</label>
-                <select
-                  class="custom-select"
-                  aria-label=".form-select-lg example"
-                  name="edited-reason"
-                  id="edited-reason"
+                <label for="edit-title-input" class="col-form-label"
+                  >Title:</label
                 >
-                  <option value="Inquire">Inquire</option>
-                  <option value="Modules">Modules</option>
-                  <option value="Tuition">Tuition</option>
-                  <option value="School Requirements">
-                    School Requirements
-                  </option>
-                  <option value="Others">Others</option>
-                </select>
+                <input
+                  id="edit-title-input"
+                  type="text"
+                  class="form-control"
+                  name="edit-title-input"
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-message-text-input" class="col-form-label"
+                  >Message:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="edit-message-text-input"
+                ></textarea>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary update-log-button">
-              Update Log
+            <button
+              type="button"
+              class="btn btn-primary save-announcement-button"
+            >
+              Save
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal for edit log record -->
+    <!-- edit announcement modal -->
 
     <script src="vendor/jquery3/jquery.min.js"></script>
     <script src="vendor/bootstrap4/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/DataTables/datatables.min.js"></script>
     <script src="vendor/fontawesome5/solid.min.js"></script>
     <script src="vendor/fontawesome5/fontawesome.min.js"></script>
-    <script src="js/logbook.js"></script>
+    <script src="./js/announcements.js"></script>
     <script src="js/script.js"></script>
-
-    <!-- delete this later -->
-    <!-- <script src="./test-files/random-name.js"></script> -->
   </body>
 </html>
