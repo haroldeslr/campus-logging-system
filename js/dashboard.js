@@ -158,6 +158,8 @@ function displayDailyLogStats(
       },
     },
   });
+
+  $("#daily-logs-loading-spinner").addClass("d-none");
 }
 // daily logs
 
@@ -312,6 +314,8 @@ function displayMonthlyLogStats(
       },
     },
   });
+
+  $("#monthly-logs-loading-spinner").addClass("d-none");
 }
 // monthly logs
 
@@ -405,5 +409,7 @@ function displayYearlyLogStats(
       },
     },
   });
+
+  $("#yearly-logs-loading-spinner").addClass("d-none");
 }
 // yearly logs

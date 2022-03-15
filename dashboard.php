@@ -83,7 +83,11 @@ if ($_SESSION['userIsLogin'] == false) {
               <div class="card">
                 <div class="card-header">Daily Logs Chart</div>
                 <div class="card-body">
-                  <p class="card-title"></p>
+                  <div id="daily-logs-loading-spinner" class="text-center mt-5">
+                    <div class="spinner-border text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
                   <div class="canvas-wrapper">
                     <canvas class="daily-logs-chart chart"></canvas>
                   </div>
@@ -95,7 +99,11 @@ if ($_SESSION['userIsLogin'] == false) {
               <div class="card">
                 <div class="card-header">Monthly Logs Chart</div>
                 <div class="card-body">
-                  <p class="card-title"></p>
+                  <div id="monthly-logs-loading-spinner" class="text-center mt-5">
+                    <div class="spinner-border text-warning" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
                   <div class="canvas-wrapper">
                     <canvas class="monthly-logs-chart chart"></canvas>
                   </div>
@@ -107,7 +115,11 @@ if ($_SESSION['userIsLogin'] == false) {
               <div class="card">
                 <div class="card-header">Yearly Logs Chart</div>
                 <div class="card-body">
-                  <p class="card-title"></p>
+                  <div id="yearly-logs-loading-spinner" class="text-center mt-5">
+                    <div class="spinner-border text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
                   <div class="canvas-wrapper">
                     <canvas class="yearly-logs-chart chart"></canvas>
                   </div>
