@@ -20,6 +20,7 @@ if ($_SESSION['userIsLogin'] == false) {
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link rel="stylesheet" href="DataTables/datatables.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link href="css/master.css" rel="stylesheet" />
 </head>
 
@@ -86,6 +87,12 @@ if ($_SESSION['userIsLogin'] == false) {
                 > -->
             </h3>
           </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <h5>Select start date and end date to show log</h5>
+              <input type="text" name="daterange" size="25" />
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12 col-lg-12">
               <div class="card">
@@ -95,14 +102,14 @@ if ($_SESSION['userIsLogin'] == false) {
                   <table class="table table-hover" id="logbook-table" width="100%">
                     <thead>
                       <tr>
+                        <th>Time</th>
                         <th>Full Name</th>
-                        <th>Contact Number</th>
                         <th>Address</th>
                         <th>Age</th>
                         <th>Temperature</th>
                         <th>Gender</th>
-                        <th>Reason</th>
-                        <th>Time</th>
+                        <th>Purpose</th>
+                        <th>Contact Number</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -188,6 +195,8 @@ if ($_SESSION['userIsLogin'] == false) {
   <script src="DataTables/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/solid.min.js" integrity="sha512-+KCv9G3MmyWnFnFrd2+/ccSx5ejo1yED85HZOvNDhtyHu2tuLL8df5BtaLXqsiF68wGLgxxMb4yL5oUyXjqSgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <script src="js/logbook.js"></script>
   <script src="js/script.js"></script>
 

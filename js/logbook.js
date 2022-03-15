@@ -1,5 +1,9 @@
 $(document).ready(function () {
-  fetch("php/get_all_logs.php")
+  getTodaysLog();
+});
+
+function getTodaysLog() {
+  fetch("php/get_todays_log.php")
     .then((res) => res.json())
     .then((response) => {
       let logData = [];
@@ -17,12 +21,12 @@ $(document).ready(function () {
         };
         logData.push(data);
       }
-      updateTable(logData);
+      initializeDatetalbe(logData);
     })
     .catch((error) => console.log(error));
-});
+}
 
-function updateTable(logData) {
+function initializeDatetalbe(logData) {
   $("#logbook-table").DataTable({
     data: logData,
     responsive: true,
@@ -31,14 +35,14 @@ function updateTable(logData) {
     searching: true,
     ordering: true,
     columns: [
+      { data: "time" },
       { data: "full_name" },
-      { data: "contact_number" },
       { data: "address" },
       { data: "age" },
       { data: "temperature" },
       { data: "gender" },
       { data: "reason" },
-      { data: "time" },
+      { data: "contact_number" },
 
       {
         data: "id",
@@ -54,6 +58,9 @@ function updateTable(logData) {
         },
       },
     ],
+    language: {
+      emptyTable: "No logs on that day.",
+    },
   });
 }
 
@@ -185,3 +192,51 @@ function updateSingleRowInTable(logData) {
   selectedRowIndex = "";
 }
 // edit log script
+
+// date picker
+$(function () {
+  $('input[name="daterange"]').daterangepicker(
+    {
+      opens: "left",
+    },
+    function (start, end, label) {
+      let startDate = start.format("YYYY-MM-DD");
+      let endDate = end.format("YYYY-MM-DD");
+      getDateTargetLogs(startDate, endDate);
+    }
+  );
+});
+
+function getDateTargetLogs(startDate, endDate) {
+  $.ajax({
+    url: "php/get_date_range_log.php",
+    data: { startDate: startDate, endDate: endDate },
+    type: "post",
+    success: function (data) {
+      let response = JSON.parse(data);
+      let logData = [];
+      for (let i = 0; i < response.length; i++) {
+        let data = {
+          id: response[i].id,
+          full_name: response[i].full_name,
+          contact_number: response[i].contact_number,
+          address: response[i].address,
+          age: response[i].age,
+          temperature: response[i].temperature,
+          gender: response[i].gender,
+          reason: response[i].reason,
+          time: response[i].time,
+        };
+        logData.push(data);
+      }
+      displayDateTargetLogs(logData);
+    },
+  });
+}
+
+function displayDateTargetLogs(logData) {
+  let table = $("#logbook-table").DataTable();
+  table.clear();
+  table.rows.add(logData);
+  table.draw();
+}
