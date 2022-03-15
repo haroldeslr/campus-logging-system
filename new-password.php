@@ -1,5 +1,5 @@
 <?php
-require_once "controllerUserData.php";
+require_once "php/controllerUserData.php";
 
 $email = $_SESSION['email'];
 if ($email == false) {
