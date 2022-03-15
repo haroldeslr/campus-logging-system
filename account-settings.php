@@ -1,144 +1,156 @@
+<?php
+require_once "controllerUserData.php";
+
+if ($_SESSION['userIsLogin'] == false) {
+  header('Location: index.php');
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Account Settings | Campus Logging System</title>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/master.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- sidebar navigation -->
-      <nav id="sidebar" class="active">
-        <div class="sidebar-header">
-          <img src="img/upang-logo.png" alt="upang-log logo" width="135" />
-        </div>
-        <ul class="list-unstyled components text-secondary">
-          <li>
-            <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
-          </li>
-          <li>
-            <a href="logbook.php"><i class="fas fa-file-alt"></i> Logbook</a>
-          </li>
-          <li>
-            <a href="announcement.php"
-              ><i class="fas fa-bullhorn"></i> Announcements</a
-            >
-          </li>
-          <li>
-            <a href="account-settings.php"
-              ><i class="fas fa-user"></i> Account Settings</a
-            >
-          </li>
-        </ul>
-      </nav>
-      <!-- sidebar navigation -->
+  <title>Account Settings | Campus Logging System</title>
 
-      <div id="body" class="active">
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-white bg-white">
-          <button
-            type="button"
-            id="sidebarCollapse"
-            class="btn btn-success default-secondary-menu"
-          >
-            <i class="fas fa-bars"></i><span></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item dropdown">
-                <div class="nav-dropdown">
-                  <a
-                    href=""
-                    class="nav-item nav-link dropdown-toggle text-secondary"
-                    data-toggle="dropdown"
-                    ><i class="fas fa-user"></i> <span>User</span>
-                    <i style="font-size: 0.8em" class="fas fa-caret-down"></i
-                  ></a>
-                  <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                    <ul class="nav-list">
-                      <li>
-                        <a href="" class="dropdown-item"
-                          ><i class="fas fa-sign-out-alt"></i> Logout</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link href="css/master.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- sidebar navigation -->
+    <nav id="sidebar" class="active">
+      <div class="sidebar-header">
+        <img src="img/upang-logo.png" alt="upang-log logo" width="135" />
+      </div>
+      <ul class="list-unstyled components text-secondary">
+        <li>
+          <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="logbook.php"><i class="fas fa-file-alt"></i> Logbook</a>
+        </li>
+        <li>
+          <a href="announcement.php"><i class="fas fa-bullhorn"></i> Announcements</a>
+        </li>
+        <li>
+          <a href="account-settings.php"><i class="fas fa-user"></i> Account Settings</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- sidebar navigation -->
+
+    <div id="body" class="active">
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg navbar-white bg-white">
+        <button type="button" id="sidebarCollapse" class="btn btn-success default-secondary-menu">
+          <i class="fas fa-bars"></i><span></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <div class="nav-dropdown">
+                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Admin</span>
+                  <i style="font-size: 0.8em" class="fas fa-caret-down"></i></a>
+                <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                  <ul class="nav-list">
+                    <li>
+                      <a href="logout.php" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                  </ul>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <!-- navbar -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- navbar -->
 
-        <div class="content">
-          <div class="container-fluid">
-            <div class="page-title">
-              <h3>Account Settings</h3>
-            </div>
-            <div class="row">
-              <div class="col-md-6 offset-md-3">
-                <div class="card card-outline-secondary">
-                  <div class="card-header">
-                    <h3 class="mb-0">Change Password</h3>
-                  </div>
-                  <div class="card-body">
-                    <form class="form" role="form" autocomplete="off">
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordOld"
-                          >Current Password</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordOld"
-                          required=""
-                        />
+      <div class="content">
+        <div class="container-fluid">
+          <div class="page-title">
+            <h3>Account Settings</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="card card-outline-secondary">
+                <div class="card-header">
+                  <h3 class="mb-0">Change Password</h3>
+                </div>
+                <div class="card-body">
+                  <form action="account-settings.php" method="POST" role="form" autocomplete="off">
+
+                    <?php
+                    if (isset($_SESSION['change-password-status'])) {
+                    ?>
+                      <div class="alert alert-success text-center">
+                        <?php echo $_SESSION['change-password-status']; ?>
                       </div>
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordNew"
-                          >New Password</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordNew"
-                          required=""
-                        />
-                        <span class="form-text small text-muted">
-                          The password must be 8-20 characters, and must
-                          <em>not</em> contain spaces.
-                        </span>
+                    <?php
+                    } elseif (count($errors) > 0) {
+                    ?>
+                      <div class="alert alert-danger text-center">
+                        <?php echo $errors['change-password']; ?>
                       </div>
-                      <div class="mb-3">
-                        <label class="mb-2" for="inputPasswordNewVerify"
-                          >Verify</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPasswordNewVerify"
-                          required=""
-                        />
-                        <span class="form-text small text-muted">
-                          To confirm, type the new password again.
-                        </span>
+                    <?php
+                    }
+                    ?>
+
+                    <div class="form-group">
+                      <label class="mb-2" for="inputPasswordOld">Current Password</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="current-password" name="current-password" required />
+                        <div class="input-group-append">
+                          <span class="input-group-text" onclick="current_password_show_hide();">
+                            <i class="fas fa-eye" id="current-password-show-eye"></i>
+                            <i class="fas fa-eye-slash d-none" id="current-password-hide-eye"></i>
+                          </span>
+                        </div>
                       </div>
-                      <div class="d-md-flex justify-content-md-end mb-3">
-                        <button
-                          type="submit"
-                          class="btn btn-success btn-lg float-right"
-                        >
-                          Save
-                        </button>
+                    </div>
+                    <div class="form-group">
+                      <label class="mb-2" for="inputPasswordNew">New Password</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="new-password" name="new-password" required />
+                        <div class="input-group-append">
+                          <span class="input-group-text" onclick="new_password_show_hide();">
+                            <i class="fas fa-eye" id="new-password-show-eye"></i>
+                            <i class="fas fa-eye-slash d-none" id="new-password-hide-eye"></i>
+                          </span>
+                        </div>
                       </div>
-                    </form>
-                  </div>
+                      <span class="form-text small text-muted">
+                        The password must be 8-20 characters, and must
+                        <em>not</em> contain spaces.
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <label class="mb-2" for="inputPasswordNewVerify">Confirm New Password</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="confirm-new-password" name="confirm-new-password" required />
+                        <div class="input-group-append">
+                          <span class="input-group-text" onclick="confirm_new_password_show_hide();">
+                            <i class="fas fa-eye" id="confirm-new-password-show-eye"></i>
+                            <i class="fas fa-eye-slash d-none" id="confirm-new-password-hide-eye"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <span class="form-text small text-muted">
+                        To confirm, type the new password again.
+                      </span>
+                    </div>
+                    <div class="d-md-flex justify-content-md-end mb-3">
+                      <button type="submit" name="change-password-without-otp" class="btn btn-success btn-lg float-right">
+                        Change Password
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -146,12 +158,19 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="vendor/jquery3/jquery.min.js"></script>
-    <script src="vendor/bootstrap4/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/fontawesome5/solid.min.js"></script>
-    <script src="vendor/fontawesome5/fontawesome.min.js"></script>
-    <script src="js/account-settings.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+  <?php
+  unset($_SESSION['change-password-status']);
+  ?>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/solid.min.js" integrity="sha512-+KCv9G3MmyWnFnFrd2+/ccSx5ejo1yED85HZOvNDhtyHu2tuLL8df5BtaLXqsiF68wGLgxxMb4yL5oUyXjqSgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/account-settings.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>
