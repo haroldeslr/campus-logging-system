@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "connect_to_database.php";
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -17,5 +17,5 @@ if (mysqli_num_rows($res) > 0) {
         echo "Incorrect username or password";
     }
 } else {
-    $errors['login-status'] = "Incorrect username or password!";
+    echo "Incorrect username or password";
 }
