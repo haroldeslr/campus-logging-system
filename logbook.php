@@ -90,7 +90,7 @@ if ($_SESSION['userIsLogin'] == false) {
           <div class="row mb-3">
             <div class="col-md-12">
               <h5>Select start date and end date to show log</h5>
-              <input type="text" name="daterange" size="25" />
+              <input type="text" name="daterange" size="25" value="01/01/2022 - 01/29/2022" />
             </div>
           </div>
           <div class="row">
