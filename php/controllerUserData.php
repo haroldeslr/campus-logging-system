@@ -31,9 +31,13 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $fetch_password)) {
             $status = $fetch['status'];
             if ($status == 'verified') {
+                $_SESSION['username'] = $fetch['username'];
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 $_SESSION['userIsLogin'] = true;
+                $_SESSION['role'] = $fetch['role'];
+                $_SESSION['type'] = $fetch['type'];
+
                 header("location: dashboard.php");
                 exit();
             } else {
@@ -158,7 +162,7 @@ if (isset($_POST['change-password-without-otp'])) {
         $run_query = mysqli_query($conn, $update_pass);
         if ($run_query) {
             $_SESSION['change-password-status'] = "Change Password Success!";
-            header('Location: account-settings.php');
+            header('Location: account-profile.php');
             exit();
         } else {
             $errors['change-password'] = "Failed to change your password!";

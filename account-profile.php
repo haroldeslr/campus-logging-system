@@ -40,7 +40,13 @@ if ($_SESSION['userIsLogin'] == false) {
           <a href="announcement.php"><i class="fas fa-bullhorn"></i> Announcements</a>
         </li>
         <li>
-          <a href="account-settings.php"><i class="fas fa-user"></i> Account Settings</a>
+          <a href="users.php"><i class="fas fa-users"></i> Users</a>
+        </li>
+        <li>
+          <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+        </li>
+        <li>
+          <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
         </li>
       </ul>
     </nav>
@@ -56,7 +62,11 @@ if ($_SESSION['userIsLogin'] == false) {
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <div class="nav-dropdown">
-                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Admin</span>
+                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>
+                    <?php
+                    echo $_SESSION['username'];
+                    ?>
+                  </span>
                   <i style="font-size: 0.8em" class="fas fa-caret-down"></i></a>
                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                   <ul class="nav-list">
@@ -73,18 +83,41 @@ if ($_SESSION['userIsLogin'] == false) {
       <!-- navbar -->
 
       <div class="content">
+        <!-- Card Text -->
+        <div class="card text-center">
+          <div class="card-header">
+            <h4>Account Profile</h4>
+          </div>
+          <div class="card-body">
+            <!-- Pakilagay nalang dito info  ng admin. -->
+            <h3 class="card-title">Hi <?php echo $_SESSION['username']; ?> !</h6>
+              <div class="card-text">
+                <p>
+                  <strong>Email:</strong> <?php echo $_SESSION['email']; ?>
+                </p>
+                <p>
+                  <strong>Role:</strong> <?php echo $_SESSION['role']; ?>
+                </p>
+                <p>
+                  <strong>Type:</strong> <?php echo $_SESSION['type']; ?>
+                </p>
+              </div>
+          </div>
+          <div class="card-footer text-muted"> </div>
+        </div>
+        <!-- End of Card Text -->
         <div class="container-fluid">
           <div class="page-title">
-            <h3>Account Settings</h3>
+            <h4>Account Settings</h4>
           </div>
           <div class="row">
             <div class="col-md-6 offset-md-3">
               <div class="card card-outline-secondary">
                 <div class="card-header">
-                  <h3 class="mb-0">Change Password</h3>
+                  <h5 class="mb-0">Change Password</h5>
                 </div>
                 <div class="card-body">
-                  <form action="account-settings.php" method="POST" role="form" autocomplete="off">
+                  <form action="account-profile.php" method="POST" role="form" autocomplete="off">
 
                     <?php
                     if (isset($_SESSION['change-password-status'])) {
@@ -169,7 +202,7 @@ if ($_SESSION['userIsLogin'] == false) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/solid.min.js" integrity="sha512-+KCv9G3MmyWnFnFrd2+/ccSx5ejo1yED85HZOvNDhtyHu2tuLL8df5BtaLXqsiF68wGLgxxMb4yL5oUyXjqSgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="js/account-settings.js"></script>
+  <script src="js/account-profile.js"></script>
   <script src="js/script.js"></script>
 </body>
 

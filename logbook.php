@@ -1,10 +1,34 @@
 <?php
 session_start();
+require "php/connect_to_database.php";
 
 if ($_SESSION['userIsLogin'] == false) {
   header('Location: index.php');
   exit();
 }
+
+$role = $_SESSION['role'];
+if ($role == "None") {
+  $_SESSION['open_logbook'] = 0;
+} else {
+  $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
+  $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+
+  if (mysqli_num_rows($roleDataResult) > 0) {
+    $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+
+    $_SESSION['open_logbook'] = $fetchRoleData['open_logbook'];
+    $_SESSION['edit_log'] = $fetchRoleData['edit_log'];
+    $_SESSION['delete_log'] = $fetchRoleData['delete_log'];
+  }
+}
+
+if ($_SESSION['open_logbook'] != 1) {
+  header('Location: access-denied.php');
+  exit();
+}
+
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +46,12 @@ if ($_SESSION['userIsLogin'] == false) {
   <link rel="stylesheet" href="DataTables/datatables.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link href="css/master.css" rel="stylesheet" />
+
+  <!-- setup log permission -->
+  <script type="text/javascript">
+    let editLog = <?php echo $_SESSION['edit_log'] ?>;
+    let deleteLog = <?php echo $_SESSION['delete_log'] ?>;
+  </script>
 </head>
 
 <body>
@@ -42,7 +72,13 @@ if ($_SESSION['userIsLogin'] == false) {
           <a href="announcement.php"><i class="fas fa-bullhorn"></i> Announcements</a>
         </li>
         <li>
-          <a href="account-settings.php"><i class="fas fa-user"></i> Account Settings</a>
+          <a href="users.php"><i class="fas fa-users"></i> Users</a>
+        </li>
+        <li>
+          <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+        </li>
+        <li>
+          <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
         </li>
       </ul>
     </nav>
@@ -58,7 +94,11 @@ if ($_SESSION['userIsLogin'] == false) {
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <div class="nav-dropdown">
-                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Admin</span>
+                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>
+                    <?php
+                    echo $_SESSION['username'];
+                    ?>
+                  </span>
                   <i style="font-size: 0.8em" class="fas fa-caret-down"></i></a>
                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                   <ul class="nav-list">

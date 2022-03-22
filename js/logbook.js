@@ -47,14 +47,28 @@ function initializeDatetalbe(logData) {
       {
         data: "id",
         render: function (data, type, row, meta) {
-          return (
-            `<a href="#" data-id='` +
-            data +
-            `' class='btn btn-outline-info btn-rounded mr-1 edit-log-button'><i class="fas fa-pen"></i></a>` +
-            `<a href="#" data-id='` +
-            data +
-            `' class='btn btn-outline-danger btn-rounded delete-log-button'><i class="fas fa-trash"></i></a>`
-          );
+          let editButton = ``;
+          let deleteButton = ``;
+
+          if (editLog == 1) {
+            editButton =
+              `<a href="#" data-id='` +
+              data +
+              `' class='btn btn-outline-info btn-rounded mr-1 edit-log-button'><i class="fas fa-pen"></i></a>`;
+          } else {
+            editButton = ``;
+          }
+
+          if (deleteLog == 1) {
+            deleteButton =
+              `<a href="#" data-id='` +
+              data +
+              `' class='btn btn-outline-danger btn-rounded delete-log-button'><i class="fas fa-trash"></i></a>`;
+          } else {
+            deleteButton = ``;
+          }
+
+          return editButton + deleteButton;
         },
       },
     ],

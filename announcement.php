@@ -1,10 +1,35 @@
 <?php
 session_start();
+require "php/connect_to_database.php";
 
 if ($_SESSION['userIsLogin'] == false) {
   header('Location: index.php');
   exit();
 }
+
+$role = $_SESSION['role'];
+if ($role == "None") {
+  $_SESSION['open_announcement'] = 0;
+} else {
+  $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
+  $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+
+  if (mysqli_num_rows($roleDataResult) > 0) {
+    $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+
+    $_SESSION['open_announcement'] = $fetchRoleData['open_announcement'];
+    $_SESSION['add_announcement'] = $fetchRoleData['add_announcement'];
+    $_SESSION['edit_announcement'] = $fetchRoleData['edit_announcement'];
+    $_SESSION['delete_announcement'] = $fetchRoleData['delete_announcement'];
+  }
+}
+
+if ($_SESSION['open_announcement'] != 1) {
+  header('Location: access-denied.php');
+  exit();
+}
+
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +46,12 @@ if ($_SESSION['userIsLogin'] == false) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link href="DataTables/datatables.min.css" rel="stylesheet" />
   <link href="css/master.css" rel="stylesheet" />
+
+  <!-- setup log permission -->
+  <script type="text/javascript">
+    let editAnnouncement = <?php echo $_SESSION['edit_announcement'] ?>;
+    let deleteAnnouncement = <?php echo $_SESSION['delete_announcement'] ?>;
+  </script>
 </head>
 
 <body>
@@ -41,7 +72,13 @@ if ($_SESSION['userIsLogin'] == false) {
           <a href="announcement.php"><i class="fas fa-bullhorn"></i> Announcements</a>
         </li>
         <li>
-          <a href="account-settings.php"><i class="fas fa-user"></i> Account Settings</a>
+          <a href="users.php"><i class="fas fa-users"></i> Users</a>
+        </li>
+        <li>
+          <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+        </li>
+        <li>
+          <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
         </li>
       </ul>
     </nav>
@@ -57,7 +94,11 @@ if ($_SESSION['userIsLogin'] == false) {
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <div class="nav-dropdown">
-                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Admin</span>
+                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span>
+                    <?php
+                    echo $_SESSION['username'];
+                    ?>
+                  </span>
                   <i style="font-size: 0.8em" class="fas fa-caret-down"></i></a>
                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                   <ul class="nav-list">
@@ -78,7 +119,11 @@ if ($_SESSION['userIsLogin'] == false) {
           <div class="page-title">
             <h3>
               Announcements
-              <a href="#" class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#add-announcement-modal"><i class="fas fa-bullhorn"></i> Add</a>
+              <?php
+              if ($_SESSION['add_announcement'] == 1) {
+                echo '<a href="#" class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#add-announcement-modal"><i class="fas fa-bullhorn"></i> Add</a>';
+              }
+              ?>
             </h3>
           </div>
           <div class="row">
@@ -118,7 +163,7 @@ if ($_SESSION['userIsLogin'] == false) {
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="add-announcement-form">
             <div class="form-group">
               <label for="date-input" class="col-form-label">Date:</label>
               <input id="date-input" type="text" class="form-control" name="date-input" />

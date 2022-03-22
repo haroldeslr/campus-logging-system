@@ -38,47 +38,134 @@ function updateTable(announcementsData) {
       {
         data: "id",
         render: function (data, type, row, meta) {
-          return (
-            `<a href="#" data-id='` +
-            data +
-            `' class='btn btn-outline-info btn-rounded mr-1 edit-announcement-button'><i class="fas fa-pen"></i></a>` +
-            `<a href="#" data-id='` +
-            data +
-            `' class='btn btn-outline-danger btn-rounded delete-announcement-button'><i class="fas fa-trash"></i></a>`
-          );
+          let editButton = ``;
+          let deleteButton = ``;
+
+          if (editAnnouncement == 1) {
+            editButton =
+              `<a href="#" data-id='` +
+              data +
+              `' class='btn btn-outline-info btn-rounded mr-1 edit-announcement-button'><i class="fas fa-pen"></i></a>`;
+          } else {
+            editButton = ``;
+          }
+
+          if (deleteAnnouncement == 1) {
+            deleteButton =
+              `<a href="#" data-id='` +
+              data +
+              `' class='btn btn-outline-danger btn-rounded delete-announcement-button'><i class="fas fa-trash"></i></a>`;
+          } else {
+            deleteButton = ``;
+          }
+
+          return editButton + deleteButton;
         },
       },
     ],
   });
 }
-// display all logs
+// display all announcement
 
 // add announcement
 $("#add-new-announcement-button").click(function () {
+  let announcementValue = getAddAnnouncementFormValue();
+  let addAnnouncementFormIsValid =
+    validateAddAnnouncementForm(announcementValue);
+
+  if (addAnnouncementFormIsValid) {
+    saveAnnouncementToDatabase(announcementValue);
+  } else {
+    alert("Fill up form before saving");
+  }
+});
+
+function getAddAnnouncementFormValue() {
   let date = $("#date-input").val();
   let title = $("#title-input").val();
   let message = $("#message-text-input").val();
 
+  let announcementValue = {
+    date: date,
+    title: title,
+    message: message,
+  };
+
+  return announcementValue;
+}
+
+function validateAddAnnouncementForm(announcementValue) {
+  let addAnnouncementFormIsValid;
+
+  if (
+    announcementValue.date === "" ||
+    announcementValue.title === "" ||
+    announcementValue.message === ""
+  ) {
+    addAnnouncementFormIsValid = false;
+  } else {
+    addAnnouncementFormIsValid = true;
+  }
+
+  return addAnnouncementFormIsValid;
+}
+
+function saveAnnouncementToDatabase(announcementValue) {
   $.ajax({
     url: "php/add_announcement.php",
     data: {
-      date: date,
-      title: title,
-      message: message,
+      date: announcementValue.date,
+      title: announcementValue.title,
+      message: announcementValue.message,
     },
     type: "post",
     success: function (data) {
       let json = JSON.parse(data);
       let status = json.status;
+
       if (status == "true") {
         alert("Add announcement success");
-        $("#add-announcement-modal").modal("hide");
+        getNewAnnouncement(announcementValue);
       } else {
         alert("Add announcement failed");
       }
+
+      $("#add-announcement-modal").modal("hide");
+      $("#add-announcement-form").trigger("reset");
     },
   });
-});
+}
+
+function getNewAnnouncement(announcementValue) {
+  $.ajax({
+    url: "php/get_new_announcement.php",
+    data: {
+      date: announcementValue.date,
+      title: announcementValue.title,
+      message: announcementValue.message,
+    },
+    type: "post",
+    success: function (data) {
+      let announcementData = JSON.parse(data);
+      addAnnouncementToDatatable(announcementData);
+    },
+  });
+}
+
+function addAnnouncementToDatatable(announcementData) {
+  let announcementTable = $("#announcement-table").DataTable();
+  let rowNode = announcementTable.row
+    .add({
+      date: announcementData.date,
+      title: announcementData.title,
+      message: announcementData.message,
+      id: announcementData.id,
+    })
+    .draw()
+    .node();
+
+  $(rowNode).css("color", "green").animate({ color: "black" });
+}
 // add announcement
 
 // delete announcement
@@ -134,20 +221,58 @@ $(document).on("click", ".edit-announcement-button", function () {
 });
 
 $(document).on("click", ".save-announcement-button", function () {
+  let editAnnouncementFormValues = getEditAnnouncementFormValues();
+  let editAnnouncementFormIsValid = validateEditAnnouncementForm(
+    editAnnouncementFormValues
+  );
+
+  if (editAnnouncementFormIsValid) {
+    updateEditAnnouncementToDatabase(editAnnouncementFormValues);
+  } else {
+    alert("Fill up form before saving");
+  }
+});
+
+function getEditAnnouncementFormValues() {
   let id = $("#edited-id").val();
   let date = $("#edit-date-input").val();
   let title = $("#edit-title-input").val();
   let message = $("#edit-message-text-input").val();
 
-  console.log("test");
+  let editAnnouncementFormValues = {
+    id: id,
+    date: date,
+    title: title,
+    message: message,
+  };
 
+  return editAnnouncementFormValues;
+}
+
+function validateEditAnnouncementForm(editAnnouncementFormValues) {
+  let editAnnouncementFormIsValid;
+
+  if (
+    editAnnouncementFormValues.date === "" ||
+    editAnnouncementFormValues.title === "" ||
+    editAnnouncementFormValues.message === ""
+  ) {
+    editAnnouncementFormIsValid = false;
+  } else {
+    editAnnouncementFormIsValid = true;
+  }
+
+  return editAnnouncementFormIsValid;
+}
+
+function updateEditAnnouncementToDatabase(editAnnouncementFormValues) {
   $.ajax({
     url: "php/update_announcement.php",
     data: {
-      id: id,
-      date: date,
-      title: title,
-      message: message,
+      id: editAnnouncementFormValues.id,
+      date: editAnnouncementFormValues.date,
+      title: editAnnouncementFormValues.title,
+      message: editAnnouncementFormValues.message,
     },
     type: "post",
     success: function (data) {
@@ -155,21 +280,16 @@ $(document).on("click", ".save-announcement-button", function () {
       let status = json.status;
 
       if (status == "true") {
-        $("#edit-announcement-modal").modal("hide");
-        const announcementData = {
-          id: id,
-          date: date,
-          title: title,
-          message: message,
-        };
-        updateSingleRowInTable(announcementData);
+        updateSingleRowInTable(editAnnouncementFormValues);
         alert("Update announcement success");
       } else {
         alert("Update announcement failed");
       }
+
+      $("#edit-announcement-modal").modal("hide");
     },
   });
-});
+}
 
 function updateSingleRowInTable(announcementData) {
   let table = $("#announcement-table").DataTable();
