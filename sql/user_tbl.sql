@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 14, 2022 at 07:50 AM
--- Server version: 10.5.12-MariaDB
--- PHP Version: 7.3.32
+-- Host: localhost
+-- Generation Time: Mar 22, 2022 at 12:15 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `id18567046_campus_logging_system_db`
+-- Database: `campus_logging_system_db`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +32,8 @@ CREATE TABLE `user_tbl` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
   `code` mediumint(50) NOT NULL,
   `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,8 +42,9 @@ CREATE TABLE `user_tbl` (
 -- Dumping data for table `user_tbl`
 --
 
-INSERT INTO `user_tbl` (`id`, `username`, `email`, `password`, `code`, `status`) VALUES
-(1, 'admin', 'riammutempest@gmail.com', '$2y$10$Ka.jtPtAp2GzYT566XAUR.Q/UwCJroZKO.L.jwLsqcPoK3bcE5KJ6', 673373, 'verified');
+INSERT INTO `user_tbl` (`id`, `username`, `email`, `password`, `role`, `type`, `code`, `status`) VALUES
+(1, 'SuperAdmin', 'riammutempest@gmail.com', '$2y$10$8j6jwCrIhCiDeDu4xxgV7.e0yr81QqWHs4zfcLaty2Z4oxxB7/3Qm', 'Administrator', 'SuperAdmin', 673373, 'verified'),
+(7, 'haroldeslr', 'asunakazuto1621@gmail.com', '$2y$10$wMcrKICT9cbShCtisqmX0.X7nJzvTgxGl9AvWNKnkKb7eIyjPw/kK', 'Manager', 'Student', 0, 'verified');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +64,7 @@ ALTER TABLE `user_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
