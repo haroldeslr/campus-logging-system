@@ -1,9 +1,9 @@
-<?php 
+<?php
 // live database config
 // $servername = "localhost";
-// $username = "id18567046_admin1";
-// $password = "9(8y6IUdW]RJ&DX1";
-// $dbname = "id18567046_campus_logging_system_db";
+// $username = "id18664230_admin";
+// $password = "zZgW/4a]#[+tc~|=";
+// $dbname = "id18664230_campus_logging_system";
 
 // local database config
 // $servername = "localhost";
