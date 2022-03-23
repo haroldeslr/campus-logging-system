@@ -91,7 +91,7 @@ if (isset($_POST['check-email'])) {
                 $info = "We've sent a passwrod reset otp to your email - $email";
                 $_SESSION['info'] = $info;
                 $_SESSION['email'] = $email;
-                header('location: reset-code.php');
+                header('location: code-verification.php');
                 exit();
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -139,7 +139,7 @@ if (isset($_POST['change-password'])) {
         if ($run_query) {
             $info = "Your password changed. Now you can login with your new password.";
             $_SESSION['info'] = $info;
-            header('Location: password-changed.php');
+            header('Location: changed-password-success.php');
             exit();
         } else {
             $errors['db-error'] = "Failed to change your password!";
