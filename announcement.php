@@ -166,7 +166,7 @@ mysqli_close($conn);
           <form id="add-announcement-form">
             <div class="form-group">
               <label for="date-input" class="col-form-label">Date:</label>
-              <input id="date-input" type="text" class="form-control" name="date-input" />
+              <input id="date-input" type="date" class="form-control" name="date-input" />
             </div>
             <div class="form-group">
               <label for="title-input" class="col-form-label">Title:</label>
@@ -203,7 +203,7 @@ mysqli_close($conn);
             <input id="edited-id" name="edited-id" type="hidden" />
             <div class="form-group">
               <label for="edit-date-input" class="col-form-label">Date:</label>
-              <input id="edit-date-input" type="text" class="form-control" name="edit-date-input" />
+              <input id="edit-date-input" type="date" class="form-control" name="edit-date-input" />
             </div>
             <div class="form-group">
               <label for="edit-title-input" class="col-form-label">Title:</label>

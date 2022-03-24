@@ -12,6 +12,7 @@ function getAllUsers() {
           id: response[i].id,
           username: response[i].username,
           email: response[i].email,
+          fullname: response[i].fullname,
           role: response[i].role,
           type: response[i].type,
         };
@@ -31,6 +32,7 @@ function initializeDatatable(usersData) {
     searching: true,
     ordering: true,
     columns: [
+      { data: "fullname" },
       { data: "username" },
       { data: "email" },
       { data: "role" },
@@ -98,7 +100,7 @@ $("#add-user-modal-button").click(function () {
   if (addUserFormIsValid) {
     saveUserToDatabase(addUserFormValue);
   } else {
-    alert("Fill up the form before saving");
+    alert("Fill up the form properly before saving");
   }
 });
 
@@ -106,6 +108,7 @@ function getAddUserFormValues() {
   let email = $("#email-input").val();
   let username = $("#username-input").val();
   let password = $("#password-input").val();
+  let fullname = $("#fullname-input").val();
   let type = $("#type-input").val();
   let role = $("#role-select").val();
 
@@ -113,6 +116,7 @@ function getAddUserFormValues() {
     email: email,
     username: username,
     password: password,
+    fullname: fullname,
     type: type,
     role: role,
   };
@@ -125,8 +129,10 @@ function validateAddUserForm(addUserFormValue) {
 
   if (
     addUserFormValue.email === "" ||
+    !addUserFormValue.email.includes("@") ||
     addUserFormValue.username === "" ||
     addUserFormValue.password === "" ||
+    addUserFormValue.fullname === "" ||
     addUserFormValue.type === "" ||
     addUserFormValue.role === ""
   ) {
@@ -145,6 +151,7 @@ function saveUserToDatabase(addUserFormValue) {
       username: addUserFormValue.username,
       email: addUserFormValue.email,
       password: addUserFormValue.password,
+      fullname: addUserFormValue.fullname,
       role: addUserFormValue.role,
       type: addUserFormValue.type,
     },
@@ -186,6 +193,7 @@ function addUserToDatatable(userData) {
   let usersTable = $("#users-table").DataTable();
   let rowNode = usersTable.row
     .add({
+      fullname: userData.fullname,
       username: userData.username,
       email: userData.email,
       role: userData.role,
@@ -217,6 +225,7 @@ $(document).on("click", ".edit-user-button", function () {
 
       $("#edited-id").val(id);
       $("#edit-username-input").val(userData.username);
+      $("#edit-fullname-input").val(userData.fullname);
       $("#edit-type-input").val(userData.type);
       updateEditRoleSelectOption(userData.role);
       oldUsername = userData.username;
@@ -256,12 +265,14 @@ $(document).on("click", "#edit-user-modal-button", function () {
 function getEditUserFormValues() {
   let id = $("#edited-id").val();
   let username = $("#edit-username-input").val();
+  let fullname = $("#edit-fullname-input").val();
   let type = $("#edit-type-input").val();
   let role = $("#edit-role-select").val();
 
   let editUserFormValues = {
     id: id,
     username: username,
+    fullname: fullname,
     type: type,
     role: role,
   };
@@ -274,6 +285,7 @@ function validateEditUserForm(editUserFormValues) {
 
   if (
     editUserFormValues.username === "" ||
+    editUserFormValues.fullname === "" ||
     editUserFormValues.type === "" ||
     editUserFormValues.role === ""
   ) {
@@ -291,6 +303,7 @@ function updateEditUserToDatabase(editUserFormValues) {
     data: {
       id: editUserFormValues.id,
       username: editUserFormValues.username,
+      fullname: editUserFormValues.fullname,
       type: editUserFormValues.type,
       role: editUserFormValues.role,
       old_username: oldUsername,
@@ -304,6 +317,7 @@ function updateEditUserToDatabase(editUserFormValues) {
         alert("Update user success");
         updateSingleRowInTable(editUserFormValues);
       } else {
+        console.log(status);
         alert("Update user failed");
         selectedRowIndex = "";
         oldUsername = "";
@@ -322,6 +336,7 @@ function updateSingleRowInTable(editUserFormValues) {
   table.row
     .add({
       username: editUserFormValues.username,
+      fullname: editUserFormValues.fullname,
       email: email,
       role: editUserFormValues.role,
       type: editUserFormValues.type,

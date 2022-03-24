@@ -3,16 +3,17 @@ require "connect_to_database.php";
 
 $id = $_POST['id'];
 $username = $_POST['username'];
+$fullname = $_POST['fullname'];
 $type = $_POST['type'];
 $role = $_POST['role'];
 $oldUsername = $_POST['old_username'];
 
 $selectQuery = "SELECT * FROM user_tbl WHERE username = '$username'";
-
 $result = mysqli_query($conn, $selectQuery);
+
 if (mysqli_num_rows($result) > 0) {
     if (strtolower($username) == strtolower($oldUsername)) {
-        $sql = "UPDATE `user_tbl` SET `username`='$username', `type`='$type', `role`='$role' WHERE id='$id'";
+        $sql = "UPDATE `user_tbl` SET `username`='$username', `fullname`='$fullname', `type`='$type', `role`='$role' WHERE id='$id'";
         $query = mysqli_query($conn, $sql);
 
         if ($query == true) {
@@ -34,7 +35,7 @@ if (mysqli_num_rows($result) > 0) {
         echo json_encode($data);
     }
 } else {
-    $sql = "UPDATE `user_tbl` SET `username`='$username', `type`='$type', `role`='$role' WHERE id='$id'";
+    $sql = "UPDATE `user_tbl` SET `username`='$username', `fullname`='$fullname', `type`='$type', `role`='$role' WHERE id='$id'";
     $query = mysqli_query($conn, $sql);
 
     if ($query == true) {

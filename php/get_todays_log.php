@@ -1,7 +1,7 @@
 <?php
 require "connect_to_database.php";
 
-// fetch data
+date_default_timezone_set('Asia/Manila');
 $currentDate = date("Y-m-d");
 $sql = "
 

@@ -134,6 +134,7 @@ mysqli_close($conn);
                                     <table width="100%" class="table table-hover" id="users-table">
                                         <thead>
                                             <tr>
+                                                <th>Full Name</th>
                                                 <th>Username</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
@@ -179,6 +180,10 @@ mysqli_close($conn);
                                 <input type="password" class="form-control" name="password-input" id="password-input" placeholder="Password" required>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="fullname-input">Full Name</label>
+                            <input type="text" class="form-control" id="fullname-input" placeholder="Full Name" required>
+                        </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="type-input">Type</label>
@@ -218,6 +223,10 @@ mysqli_close($conn);
                         <div class="form-group">
                             <label for="edit-username-input">Username</label>
                             <input type="text" class="form-control" id="edit-username-input" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-fullname-input">Username</label>
+                            <input type="text" class="form-control" id="edit-fullname-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
