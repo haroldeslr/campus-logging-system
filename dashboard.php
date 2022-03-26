@@ -7,17 +7,27 @@ if ($_SESSION['userIsLogin'] == false) {
   exit();
 }
 
-$role = $_SESSION['role'];
-if ($role == "None") {
-  $_SESSION['open_dashboard'] = 0;
-} else {
-  $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
-  $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
 
-  if (mysqli_num_rows($roleDataResult) > 0) {
-    $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+$getUserRoleSql = "SELECT * FROM user_tbl WHERE username = '$username' AND email = '$email'";
+$userDataResult = mysqli_query($conn, $getUserRoleSql);
 
-    $_SESSION['open_dashboard'] = $fetchRoleData['open_dashboard'];
+if (mysqli_num_rows($userDataResult) > 0) {
+  $fetchUserData = mysqli_fetch_assoc($userDataResult);
+  $role = $fetchUserData['role'];
+  $_SESSION['role'] = $role;
+
+  if ($role == "None") {
+    $_SESSION['open_dashboard'] = 0;
+  } else {
+    $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
+    $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+
+    if (mysqli_num_rows($roleDataResult) > 0) {
+      $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+      $_SESSION['open_dashboard'] = $fetchRoleData['open_dashboard'];
+    }
   }
 }
 

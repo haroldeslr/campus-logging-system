@@ -35,7 +35,6 @@ if (isset($_POST['login'])) {
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 $_SESSION['userIsLogin'] = true;
-                $_SESSION['role'] = $fetch['role'];
                 $_SESSION['type'] = $fetch['type'];
 
                 header("location: dashboard.php");

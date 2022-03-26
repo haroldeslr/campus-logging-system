@@ -7,20 +7,31 @@ if ($_SESSION['userIsLogin'] == false) {
     exit();
 }
 
-$role = $_SESSION['role'];
-if ($role == "None") {
-    $_SESSION['open_roles_and_permissions'] = 0;
-} else {
-    $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
-    $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
 
-    if (mysqli_num_rows($roleDataResult) > 0) {
-        $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+$getUserRoleSql = "SELECT * FROM user_tbl WHERE username = '$username' AND email = '$email'";
+$userDataResult = mysqli_query($conn, $getUserRoleSql);
 
-        $_SESSION['open_roles_and_permissions'] = $fetchRoleData['open_roles_and_permissions'];
-        $_SESSION['add_roles_and_permissions'] = $fetchRoleData['add_roles_and_permissions'];
-        $_SESSION['edit_roles_and_permissions'] = $fetchRoleData['edit_roles_and_permissions'];
-        $_SESSION['delete_roles_and_permissions'] = $fetchRoleData['delete_roles_and_permissions'];
+if (mysqli_num_rows($userDataResult) > 0) {
+    $fetchUserData = mysqli_fetch_assoc($userDataResult);
+    $role = $fetchUserData['role'];
+    $_SESSION['role'] = $role;
+
+    if ($role == "None") {
+        $_SESSION['open_roles_and_permissions'] = 0;
+    } else {
+        $getRoleDataSql = "SELECT * FROM roles_tbl WHERE role_name = '$role'";
+        $roleDataResult = mysqli_query($conn, $getRoleDataSql);
+
+        if (mysqli_num_rows($roleDataResult) > 0) {
+            $fetchRoleData = mysqli_fetch_assoc($roleDataResult);
+
+            $_SESSION['open_roles_and_permissions'] = $fetchRoleData['open_roles_and_permissions'];
+            $_SESSION['add_roles_and_permissions'] = $fetchRoleData['add_roles_and_permissions'];
+            $_SESSION['edit_roles_and_permissions'] = $fetchRoleData['edit_roles_and_permissions'];
+            $_SESSION['delete_roles_and_permissions'] = $fetchRoleData['delete_roles_and_permissions'];
+        }
     }
 }
 
