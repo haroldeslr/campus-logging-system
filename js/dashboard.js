@@ -117,7 +117,7 @@ function displayDailyLogStats(
       labels: [date1, date2, date3, date4, date5, date6, date7],
       datasets: [
         {
-          label: "# of Daily Logs",
+          label: "# of Daily Visitors",
           backgroundColor: "rgba(51, 102, 153, .5)",
           borderColor: "rgba(51, 102, 153)",
           borderWidth: 1,
@@ -151,7 +151,7 @@ function displayDailyLogStats(
             stacked: true,
             scaleLabel: {
               display: true,
-              labelString: "Number of Logs",
+              labelString: "Number of Visitors",
             },
           },
         ],
@@ -273,7 +273,7 @@ function displayMonthlyLogStats(
       ],
       datasets: [
         {
-          label: "# of Monthly Logs",
+          label: "# of Monthly Visitors",
           backgroundColor: "rgba(255, 102, 0, .5)",
           borderColor: "rgba(255, 102, 0)",
           borderWidth: 1,
@@ -307,7 +307,7 @@ function displayMonthlyLogStats(
             stacked: true,
             scaleLabel: {
               display: true,
-              labelString: "Number of Logs",
+              labelString: "Number of Visitors",
             },
           },
         ],
@@ -368,7 +368,7 @@ function displayYearlyLogStats(
       labels: ["2018", "2019", "2020", "2021", "2022"],
       datasets: [
         {
-          label: "# of Yearly Logs",
+          label: "# of Yearly Visitors",
           backgroundColor: "rgba(76, 175, 80, .5)",
           borderColor: "rgba(76, 175, 80)",
           borderWidth: 1,
@@ -402,7 +402,7 @@ function displayYearlyLogStats(
             stacked: true,
             scaleLabel: {
               display: true,
-              labelString: "Number of Logs",
+              labelString: "Number of Visitors",
             },
           },
         ],

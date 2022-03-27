@@ -124,7 +124,7 @@ mysqli_close($conn);
           <div class="row">
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header">Daily Logs Chart</div>
+                <div class="card-header">Daily Visitors Chart</div>
                 <div class="card-body">
                   <div id="daily-logs-loading-spinner" class="text-center mt-5">
                     <div class="spinner-border text-info" role="status">
@@ -140,7 +140,7 @@ mysqli_close($conn);
 
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header">Monthly Logs Chart</div>
+                <div class="card-header">Monthly Visitors Chart</div>
                 <div class="card-body">
                   <div id="monthly-logs-loading-spinner" class="text-center mt-5">
                     <div class="spinner-border text-warning" role="status">
@@ -156,7 +156,7 @@ mysqli_close($conn);
 
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header">Yearly Logs Chart</div>
+                <div class="card-header">Yearly Visitors Chart</div>
                 <div class="card-body">
                   <div id="yearly-logs-loading-spinner" class="text-center mt-5">
                     <div class="spinner-border text-success" role="status">
