@@ -51,6 +51,7 @@ mysqli_close($conn);
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/adminlogo.png">
 
     <title>Users | Campus Logging System</title>
 
@@ -254,7 +255,7 @@ mysqli_close($conn);
                 </div>
                 <div class="modal-footer">
                     <button id="edit-user-modal-button" type="button" class="btn btn-primary">
-                        <i class="fas fa-users"></i> Edit
+                        <i class="fas fa-users"></i> Save
                     </button>
                 </div>
             </div>

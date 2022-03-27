@@ -51,6 +51,7 @@ mysqli_close($conn);
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/adminlogo.png">
 
     <title>User Roles | Campus Logging System</title>
 
@@ -366,7 +367,7 @@ mysqli_close($conn);
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="edit-roles-modal-button" class="btn btn-success"><i class="fas fa-check"></i> Edit</button>
+                    <button id="edit-roles-modal-button" class="btn btn-success"><i class="fas fa-check"></i> Save</button>
                     <a class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancel</a>
                 </div>
             </div>
