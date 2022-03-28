@@ -142,10 +142,17 @@ mysqli_close($conn);
           <div class="row mb-3">
             <div class="col-md-12">
               <h5>Select start date and end date to show log</h5>
-              <input type="text" name="daterange" size="25" value="01/01/2022 - 01/29/2022" />
+              <input type="text" name="daterange" size="25" value="
+              <?php
+              date_default_timezone_set('Asia/Manila');
+              $today = date("m/d/Y");
+              $tomorrow = date("m-d-Y", strtotime('tomorrow'));
+              $dateRange = $today . " - " . $tomorrow;
+              echo $dateRange;
+              ?>" />
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-4">
             <div class="col-md-12 col-lg-12">
               <div class="card">
                 <div class="card-header">Logbook Table</div>
@@ -192,11 +199,11 @@ mysqli_close($conn);
             <input id="edited-time" name="edited-time" type="hidden" />
             <div class="form-group">
               <label for="fullname" class="col-form-label">Full Name</label>
-              <input type="text" class="form-control" name="edited-fullname" id="edited-fullname" />
+              <input type="text" class="form-control" maxlength="255" name="edited-fullname" id="edited-fullname" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Age</label>
-              <input type="text" class="form-control" id="edited-age" name="edited-age" />
+              <input type="number" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" id="edited-age" name="edited-age" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Gender</label>
@@ -207,15 +214,15 @@ mysqli_close($conn);
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Address</label>
-              <input type="text" class="form-control" id="edited-address" name="edited-address" />
+              <input type="text" class="form-control" maxlength="255" id="edited-address" name="edited-address" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Contact Number</label>
-              <input type="text" class="form-control" id="edited-contactnumber" name="edited-contactnumber" />
+              <input type="number" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" id="edited-contactnumber" name="edited-contactnumber" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Temperature</label>
-              <input type="text" class="form-control" id="edited-temp" name="edited-temp" />
+              <input type="number" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" id="edited-temp" name="edited-temp" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Reason</label>
@@ -245,6 +252,8 @@ mysqli_close($conn);
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
   <script src="DataTables/datatables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/solid.min.js" integrity="sha512-+KCv9G3MmyWnFnFrd2+/ccSx5ejo1yED85HZOvNDhtyHu2tuLL8df5BtaLXqsiF68wGLgxxMb4yL5oUyXjqSgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

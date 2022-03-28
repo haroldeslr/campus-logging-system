@@ -29,9 +29,17 @@ function getTodaysLog() {
 function initializeDatetalbe(logData) {
   $("#logbook-table").DataTable({
     data: logData,
+    dom: "Bfrtip",
+    buttons: [
+      {
+        extend: "print",
+        exportOptions: {
+          columns: [0, 1, 2, 3, 4, 5, 6, 7],
+        },
+      },
+    ],
     responsive: true,
-    pageLength: 25,
-    lengthChange: true,
+    pageLength: 100,
     searching: true,
     ordering: true,
     columns: [
@@ -146,44 +154,85 @@ $(document).on("click", ".update-log-button", function () {
   let reason = $("#edited-reason").val();
   let time = $("#edited-time").val();
 
-  $.ajax({
-    url: "php/update_log.php",
-    data: {
-      id: id,
-      fullname: fullname,
-      age: age,
-      gender: gender,
-      address: address,
-      contactnumber: contactnumber,
-      temperature: temperature,
-      reason: reason,
-    },
-    type: "post",
-    success: function (data) {
-      let json = JSON.parse(data);
-      let status = json.status;
+  let editLogFormIsValid = validateEditLogForm();
 
-      if (status == "true") {
-        $("#edit-log-modal").modal("hide");
-        const logData = {
-          id: id,
-          fullname: fullname,
-          age: age,
-          gender: gender,
-          address: address,
-          contactnumber: contactnumber,
-          temperature: temperature,
-          reason: reason,
-          time: time,
-        };
-        updateSingleRowInTable(logData);
-        alert("Update Log Success");
-      } else {
-        alert("Update Log Failed");
-      }
-    },
-  });
+  if (editLogFormIsValid) {
+    $.ajax({
+      url: "php/update_log.php",
+      data: {
+        id: id,
+        fullname: fullname,
+        age: age,
+        gender: gender,
+        address: address,
+        contactnumber: contactnumber,
+        temperature: temperature,
+        reason: reason,
+      },
+      type: "post",
+      success: function (data) {
+        let json = JSON.parse(data);
+        let status = json.status;
+
+        if (status == "true") {
+          $("#edit-log-modal").modal("hide");
+          const logData = {
+            id: id,
+            fullname: fullname,
+            age: age,
+            gender: gender,
+            address: address,
+            contactnumber: contactnumber,
+            temperature: temperature,
+            reason: reason,
+            time: time,
+          };
+          updateSingleRowInTable(logData);
+          alert("Update Log Success");
+        } else {
+          alert("Update Log Failed");
+        }
+      },
+    });
+  } else {
+    alert("Please fill up form properly");
+  }
 });
+
+function validateEditLogForm() {
+  let editLogFormIsValid = false;
+
+  let fullname = $("#edited-fullname").val();
+  let age = $("#edited-age").val();
+  let gender = $("#edited-gender").val();
+  let address = $("#edited-address").val();
+  let contactnumber = $("#edited-contactnumber").val();
+  let temperature = $("#edited-temp").val();
+  let reason = $("#edited-reason").val();
+
+  if (
+    fullname == "" ||
+    fullname.length > 255 ||
+    age == "" ||
+    age.length > 2 ||
+    gender == "" ||
+    gender.length > 6 ||
+    address == "" ||
+    address.length > 255 ||
+    contactnumber == "" ||
+    contactnumber.length > 12 ||
+    temperature == "" ||
+    temperature.length > 5 ||
+    reason == "" ||
+    reason.length > 255
+  ) {
+    editLogFormIsValid = false;
+  } else {
+    editLogFormIsValid = true;
+  }
+
+  return editLogFormIsValid;
+}
 
 function updateSingleRowInTable(logData) {
   let table = $("#logbook-table").DataTable();

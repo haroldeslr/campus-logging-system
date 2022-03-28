@@ -121,7 +121,7 @@ mysqli_close($conn);
           <div class="page-title">
             <h3>Dashboard</h3>
           </div>
-          <div class="row">
+          <div class="row mb-4">
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header">Daily Visitors Chart</div>

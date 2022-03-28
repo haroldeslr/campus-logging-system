@@ -138,7 +138,7 @@ mysqli_close($conn);
               ?>
             </h3>
           </div>
-          <div class="row">
+          <div class="row mb-4">
             <div class="col-md-12 col-lg-12">
               <div class="card">
                 <div class="card-header">Announcements Table</div>

@@ -139,7 +139,7 @@ mysqli_close($conn);
                             ?>
                         </h3>
                     </div>
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-md-12 col-lg-12">
                             <div class="box box-primary">
                                 <div class="box-body">
@@ -237,7 +237,7 @@ mysqli_close($conn);
                             <input type="text" class="form-control" id="edit-username-input" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <label for="edit-fullname-input">Username</label>
+                            <label for="edit-fullname-input">Fullname</label>
                             <input type="text" class="form-control" id="edit-fullname-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">

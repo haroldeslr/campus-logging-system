@@ -111,7 +111,7 @@ if ($_SESSION['userIsLogin'] == false) {
           <div class="page-title">
             <h4>Account Settings</h4>
           </div>
-          <div class="row">
+          <div class="row mb-4">
             <div class="col-md-6 offset-md-3">
               <div class="card card-outline-secondary">
                 <div class="card-header">
