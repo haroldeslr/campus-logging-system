@@ -180,26 +180,26 @@ mysqli_close($conn);
                     <form id="add-user-form" novalidate accept-charset="utf-8">
                         <div class="form-group">
                             <label for="email-input">Email</label>
-                            <input type="email" class="form-control" name="email-input" id="email-input" placeholder="Email" required>
+                            <input type="email" class="form-control" maxlength="255" name="email-input" id="email-input" placeholder="Email" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="username-input">Username</label>
-                                <input type="text" class="form-control" name="username-input" id="username-input" placeholder="Username" required>
+                                <input type="text" class="form-control" maxlength="255" name="username-input" id="username-input" placeholder="Username" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="password-input">Password</label>
-                                <input type="password" class="form-control" name="password-input" id="password-input" placeholder="Password" required>
+                                <input type="password" class="form-control" maxlength="15" name="password-input" id="password-input" placeholder="Password" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="fullname-input">Full Name</label>
-                            <input type="text" class="form-control" id="fullname-input" placeholder="Full Name" required>
+                            <input type="text" class="form-control" maxlength="255" id="fullname-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="type-input">Type</label>
-                                <input type="text" class="form-control" name="type-input" id="type-input" placeholder="Type" required>
+                                <input type="text" class="form-control" maxlength="255" name="type-input" id="type-input" placeholder="Type" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="role-select">Role</label>
@@ -234,16 +234,16 @@ mysqli_close($conn);
                         <input id="edited-id" type="hidden" />
                         <div class="form-group">
                             <label for="edit-username-input">Username</label>
-                            <input type="text" class="form-control" id="edit-username-input" placeholder="Username" required>
+                            <input type="text" class="form-control" maxlength="255" id="edit-username-input" placeholder="Username" required>
                         </div>
                         <div class="form-group">
                             <label for="edit-fullname-input">Fullname</label>
-                            <input type="text" class="form-control" id="edit-fullname-input" placeholder="Full Name" required>
+                            <input type="text" class="form-control" maxlength="255" id="edit-fullname-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="edit-type-input">Type</label>
-                                <input type="text" class="form-control" id="edit-type-input" placeholder="Type" required>
+                                <input type="text" class="form-control" maxlength="255" id="edit-type-input" placeholder="Type" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="edit-role-select">Role</label>
