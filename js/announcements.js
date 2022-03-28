@@ -99,8 +99,11 @@ function validateAddAnnouncementForm(announcementValue) {
 
   if (
     announcementValue.date === "" ||
+    announcementValue.date.length > 255 ||
     announcementValue.title === "" ||
-    announcementValue.message === ""
+    announcementValue.title.length > 255 ||
+    announcementValue.message === "" ||
+    announcementValue.message.length > 255
   ) {
     addAnnouncementFormIsValid = false;
   } else {
@@ -254,8 +257,11 @@ function validateEditAnnouncementForm(editAnnouncementFormValues) {
 
   if (
     editAnnouncementFormValues.date === "" ||
+    editAnnouncementFormValues.date.length > 255 ||
     editAnnouncementFormValues.title === "" ||
-    editAnnouncementFormValues.message === ""
+    editAnnouncementFormValues.title.length > 255 ||
+    editAnnouncementFormValues.message === "" ||
+    editAnnouncementFormValues.message.length > 255
   ) {
     editAnnouncementFormIsValid = false;
   } else {
