@@ -182,7 +182,7 @@ mysqli_close($conn);
             </div>
             <div class="form-group">
               <label for="title-input" class="col-form-label">Title:</label>
-              <input id="title-input" type="text" maxlength="255" class="form-control" name="title-input" />
+              <input id="title-input" type="text" maxlength="70" class="form-control" name="title-input" />
             </div>
             <div class="form-group">
               <label for="message-text-input" class="col-form-label">Message:</label>

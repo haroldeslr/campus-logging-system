@@ -75,7 +75,7 @@ function initializeDatatable(rolesData) {
 $("#add-role-button").click(function () {
   let roleNameValue = $("#role-name-input").val();
 
-  if (roleNameValue === "") {
+  if (roleNameValue === "" || roleNameValue.length > 70) {
     alert("Type role name before saving");
   } else {
     let rolesAndPermissionsData = getAddRolesAndPermissionsFormValue();
@@ -525,10 +525,13 @@ function updateEditRolesFormValues(rolesAndPermissionsData) {
 $(document).on("click", "#edit-roles-modal-button", function () {
   let rolesAndPermissionsData = getEditRolesAndPermissionsFormValue();
 
-  if (rolesAndPermissionsData.roleName != "") {
+  if (
+    rolesAndPermissionsData.roleName != "" &&
+    rolesAndPermissionsData.roleName.length <= 70
+  ) {
     updateEditRolesToDatabase(rolesAndPermissionsData);
   } else {
-    alert("Fill up form before saving");
+    alert("Fill up form properly before saving");
   }
 });
 

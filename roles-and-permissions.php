@@ -176,7 +176,7 @@ mysqli_close($conn);
                     <form id="add-roles-and-permissions-form">
                         <div class="form-group">
                             <label for="role-name-input" class="col-form-label">Role Name:</label>
-                            <input id="role-name-input" type="text" class="form-control" name="role-name-input" />
+                            <input id="role-name-input" maxlength="70" type="text" class="form-control" name="role-name-input" />
                         </div>
                         <div class="form-group">
                             <label class="text-uppercase"><small>Dashboard</small></label>
@@ -283,7 +283,7 @@ mysqli_close($conn);
                         <input id="edited-id" type="hidden" />
                         <div class="form-group">
                             <label for="edit-role-name-input" class="col-form-label">Role Name:</label>
-                            <input id="edit-role-name-input" type="text" class="form-control" />
+                            <input id="edit-role-name-input" maxlength="70" type="text" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label class="text-uppercase"><small>Dashboard</small></label>

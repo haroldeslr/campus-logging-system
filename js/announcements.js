@@ -99,9 +99,9 @@ function validateAddAnnouncementForm(announcementValue) {
 
   if (
     announcementValue.date === "" ||
-    announcementValue.date.length > 255 ||
+    announcementValue.date.length > 70 ||
     announcementValue.title === "" ||
-    announcementValue.title.length > 255 ||
+    announcementValue.title.length > 70 ||
     announcementValue.message === "" ||
     announcementValue.message.length > 255
   ) {

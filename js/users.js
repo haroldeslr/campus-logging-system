@@ -130,15 +130,15 @@ function validateAddUserForm(addUserFormValue) {
   if (
     addUserFormValue.email === "" ||
     !addUserFormValue.email.includes("@") ||
-    addUserFormValue.email.length > 255 ||
+    addUserFormValue.email.length > 70 ||
     addUserFormValue.username === "" ||
-    addUserFormValue.username.length > 255 ||
+    addUserFormValue.username.length > 70 ||
     addUserFormValue.password === "" ||
     addUserFormValue.password.length > 15 ||
     addUserFormValue.fullname === "" ||
-    addUserFormValue.fullname.length > 255 ||
+    addUserFormValue.fullname.length > 70 ||
     addUserFormValue.type === "" ||
-    addUserFormValue.type.length > 255 ||
+    addUserFormValue.type.length > 70 ||
     addUserFormValue.role === ""
   ) {
     addUserFormIsValid = false;
@@ -290,11 +290,11 @@ function validateEditUserForm(editUserFormValues) {
 
   if (
     editUserFormValues.username === "" ||
-    editUserFormValues.username.length > 255 ||
+    editUserFormValues.username.length > 70 ||
     editUserFormValues.fullname === "" ||
-    editUserFormValues.fullname.length > 255 ||
+    editUserFormValues.fullname.length > 70 ||
     editUserFormValues.type === "" ||
-    editUserFormValues.type.length > 255 ||
+    editUserFormValues.type.length > 70 ||
     editUserFormValues.role === ""
   ) {
     editUserFormIsValid = false;

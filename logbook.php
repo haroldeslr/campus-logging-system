@@ -199,7 +199,7 @@ mysqli_close($conn);
             <input id="edited-time" name="edited-time" type="hidden" />
             <div class="form-group">
               <label for="fullname" class="col-form-label">Full Name</label>
-              <input type="text" class="form-control" maxlength="255" name="edited-fullname" id="edited-fullname" />
+              <input type="text" class="form-control" maxlength="70" name="edited-fullname" id="edited-fullname" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Age</label>
@@ -214,7 +214,7 @@ mysqli_close($conn);
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Address</label>
-              <input type="text" class="form-control" maxlength="255" id="edited-address" name="edited-address" />
+              <input type="text" class="form-control" maxlength="70" id="edited-address" name="edited-address" />
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Contact Number</label>

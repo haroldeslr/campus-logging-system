@@ -212,13 +212,13 @@ function validateEditLogForm() {
 
   if (
     fullname == "" ||
-    fullname.length > 255 ||
+    fullname.length > 70 ||
     age == "" ||
     age.length > 2 ||
     gender == "" ||
     gender.length > 6 ||
     address == "" ||
-    address.length > 255 ||
+    address.length > 70 ||
     contactnumber == "" ||
     contactnumber.length > 12 ||
     temperature == "" ||
