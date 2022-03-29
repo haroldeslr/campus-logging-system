@@ -88,7 +88,7 @@ mysqli_close($conn);
                     <a href="users.php"><i class="fas fa-users"></i> Users</a>
                 </li>
                 <li>
-                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i>Offices Management</a>
                 </li>
                 <li>
                     <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
@@ -131,7 +131,7 @@ mysqli_close($conn);
                 <div class="container-fluid">
                     <div class="page-title">
                         <h3>
-                            Roles and Permissions
+                            Department Responsibilities Management
                             <?php
                             if ($_SESSION['add_roles_and_permissions'] == 1) {
                                 echo '<a href="roles.html" class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#add-roles-modal"><i class="fas fa-plus-circle"></i> Add</a>';
@@ -146,7 +146,7 @@ mysqli_close($conn);
                                     <table width="100%" class="table table-hover" id="roles-and-permissions-table">
                                         <thead>
                                             <tr>
-                                                <th>Role Name</th>
+                                                <th>Department</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

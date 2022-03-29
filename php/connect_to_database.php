@@ -15,7 +15,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "campus_logging_system_db";
+$dbname = "camplog";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
