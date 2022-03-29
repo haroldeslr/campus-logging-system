@@ -88,7 +88,7 @@ mysqli_close($conn);
                     <a href="users.php"><i class="fas fa-users"></i> Users</a>
                 </li>
                 <li>
-                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i>Offices Management</a>
+                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i>Department Management</a>
                 </li>
                 <li>
                     <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
