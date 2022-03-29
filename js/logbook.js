@@ -168,6 +168,7 @@ $(document).on("click", ".update-log-button", function () {
         contactnumber: contactnumber,
         temperature: temperature,
         reason: reason,
+        time: time,
       },
       type: "post",
       success: function (data) {
