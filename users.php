@@ -246,7 +246,7 @@ mysqli_close($conn);
                                 <input type="text" class="form-control" maxlength="70" id="edit-type-input" placeholder="Type" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="edit-role-select">Role</label>
+                                <label for="edit-role-select">Department</label>
                                 <select class="form-control" id="edit-role-select" required>
                                 </select>
                             </div>
