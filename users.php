@@ -149,7 +149,7 @@ mysqli_close($conn);
                                                 <th>Full Name</th>
                                                 <th>Username</th>
                                                 <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Department</th>
                                                 <th>Type</th>
                                                 <th></th>
                                             </tr>
@@ -202,7 +202,7 @@ mysqli_close($conn);
                                 <input type="text" class="form-control" maxlength="70" name="type-input" id="type-input" placeholder="Type" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="role-select">Role</label>
+                                <label for="role-select">Department</label>
                                 <select name="role-select" class="form-control" id="role-select" required>
                                 </select>
                             </div>
