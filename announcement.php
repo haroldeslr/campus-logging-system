@@ -149,8 +149,8 @@ mysqli_close($conn);
                       <tr>
                         <th>Date</th>
                         <th>Title</th>
-                        <th>Department</th>
                         <th>Message</th>
+                        <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -184,11 +184,6 @@ mysqli_close($conn);
             <div class="form-group">
               <label for="title-input" class="col-form-label">Title:</label>
               <input id="title-input" type="text" maxlength="70" class="form-control" name="title-input" />
-            </div>
-            <div class="form-group ">
-                <label for="role-select">Department</label>
-                <select name="role-select" class="form-control" id="role-select" required>
-                 </select>
             </div>
             <div class="form-group">
               <label for="message-text-input" class="col-form-label">Message:</label>
