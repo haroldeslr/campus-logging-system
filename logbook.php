@@ -168,9 +168,8 @@ mysqli_close($conn);
                         <th>Temperature</th>
                         <th>Gender</th>
                         <th>Purpose</th>
-                        <th>Contact Number</th>
                         <th>Target Location</th>
-                        <th>Image</th>
+                        <th>Contact Number</th>
                         <th>Action</th>
                       </tr>
                     </thead>
