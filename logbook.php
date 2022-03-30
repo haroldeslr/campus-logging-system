@@ -169,6 +169,8 @@ mysqli_close($conn);
                         <th>Gender</th>
                         <th>Purpose</th>
                         <th>Contact Number</th>
+                        <th>Target Location</th>
+                        <th>Image</th>
                         <th>Action</th>
                       </tr>
                     </thead>
