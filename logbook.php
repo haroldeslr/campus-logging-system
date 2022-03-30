@@ -196,7 +196,8 @@ mysqli_close($conn);
         </div>
         <div class="modal-body">
          <div class="d-flex justify-content-center">
-                        <img src="img/boji.png" />
+           <!-- set ko na size dito sa html para kahit dito na iset -->
+              <img src="img/boji.png" width="200" height="200"/>
          </div>
           <form>
             <input id="edited-id" name="edited-id" type="hidden" />
