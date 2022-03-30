@@ -229,7 +229,7 @@ mysqli_close($conn);
               <input type="number" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" id="edited-temp" name="edited-temp" />
             </div>
             <div class="form-group">
-              <label for="Age" class="col-form-label">Reason</label>
+              <label for="Age" class="col-form-label">Purpose</label>
               <select class="custom-select" aria-label=".form-select-lg example" name="edited-reason" id="edited-reason">
                 <option value="Inquire">Inquire</option>
                 <option value="Modules">Modules</option>
