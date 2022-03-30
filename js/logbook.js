@@ -17,6 +17,8 @@ function getTodaysLog() {
           temperature: response[i].temperature,
           gender: response[i].gender,
           reason: response[i].reason,
+          selected_buildings: response[i].selected_buildings,
+          image_name: response[i].image_name,
           time: response[i].time,
         };
         logData.push(data);
@@ -50,6 +52,7 @@ function initializeDatetalbe(logData) {
       { data: "temperature" },
       { data: "gender" },
       { data: "reason" },
+      { data: "selected_buildings" },
       { data: "contact_number" },
 
       {
@@ -135,8 +138,14 @@ $(document).on("click", ".edit-log-button", function () {
       $("#edited-temp").val(json.temperature);
       $("#edited-gender").val(json.gender).change();
       $("#edited-reason").val(json.reason).change();
+      $("#edited-target-location").val(json.selected_buildings);
       $("#edited-id").val(id);
       $("#edited-time").val(json.time);
+
+      // load image
+      let baseURL = "https://pucls.000webhostapp.com/php/imageupload/";
+      let imageName = json.image_name;
+      $("#selfie-img").prop("src", baseURL + imageName);
     },
   });
 
@@ -152,6 +161,7 @@ $(document).on("click", ".update-log-button", function () {
   let contactnumber = $("#edited-contactnumber").val();
   let temperature = $("#edited-temp").val();
   let reason = $("#edited-reason").val();
+  let selectedBuildings = $("#edited-target-location").val();
   let time = $("#edited-time").val();
 
   let editLogFormIsValid = validateEditLogForm();
@@ -186,6 +196,7 @@ $(document).on("click", ".update-log-button", function () {
             contactnumber: contactnumber,
             temperature: temperature,
             reason: reason,
+            selected_buildings: selectedBuildings,
             time: time,
           };
           updateSingleRowInTable(logData);
@@ -241,14 +252,15 @@ function updateSingleRowInTable(logData) {
 
   table.row
     .add({
+      time: logData.time,
       full_name: logData.fullname,
-      contact_number: logData.contactnumber,
       address: logData.address,
       age: logData.age,
       temperature: logData.temperature,
       gender: logData.gender,
       reason: logData.reason,
-      time: logData.time,
+      selected_buildings: logData.selected_buildings,
+      contact_number: logData.contactnumber,
       id: logData.id,
     })
     .draw();

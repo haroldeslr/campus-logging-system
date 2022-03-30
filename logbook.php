@@ -58,6 +58,7 @@ mysqli_close($conn);
   <link rel="stylesheet" href="DataTables/datatables.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link href="css/master.css" rel="stylesheet" />
+  <link href="css/logbook.css" rel="stylesheet" />
 
   <!-- setup log permission -->
   <script type="text/javascript">
@@ -195,10 +196,10 @@ mysqli_close($conn);
           </button>
         </div>
         <div class="modal-body">
-         <div class="d-flex justify-content-center">
-           <!-- set ko na size dito sa html para kahit dito na iset -->
-              <img src="img/boji.png" width="200" height="200"/>
-         </div>
+          <div class="d-flex justify-content-center">
+            <!-- set ko na size dito sa html para kahit dito na iset -->
+            <img id="selfie-img" src="img/boji.png" class="rotated" width="200" height="200" />
+          </div>
           <form>
             <input id="edited-id" name="edited-id" type="hidden" />
             <input id="edited-time" name="edited-time" type="hidden" />
@@ -243,21 +244,8 @@ mysqli_close($conn);
             </div>
             <div class="form-group">
               <label for="Age" class="col-form-label">Target Location</label>
-              <select class="custom-select" aria-label=".form-select-lg example" name="edited-location" id="edited-location">
-                <option value="PTC">PTC</option>
-                <option value="CSDL/ITS">CSDL/ITS</option>
-                <option value="OP">OP (OFFICE OF THE PRESIDENT)</option>
-                <option value="FVR">FVR</option>
-                <option value="CMA">CMA</option>
-                <option value="BASIC ED">BASIC ED</option>
-                <option value="CHS">CHS</option>
-                <option value="GYM">GYM</option>
-                <option value="SP">STUDENT PLAZA</option>
-                <option value="PHINMA GARDEN">PHINMA GARDEN</option>
-                <option value="NORTH HALL">NORTH HALL</option>
-                <option value="MBA HALL">MBA HALL</option>
-                <option value="FACULTY CENTER">FACULTY CENTER</option>
-              </select>
+              <textarea class="form-control" id="edited-target-location" rows="3" disabled>
+              </textarea>
             </div>
           </form>
         </div>
