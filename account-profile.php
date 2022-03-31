@@ -97,10 +97,7 @@ if ($_SESSION['userIsLogin'] == false) {
                   <strong>Email:</strong> <?php echo $_SESSION['email']; ?>
                 </p>
                 <p>
-                  <strong>Role:</strong> <?php echo $_SESSION['role']; ?>
-                </p>
-                <p>
-                  <strong>Type:</strong> <?php echo $_SESSION['type']; ?>
+                  <strong>Department:</strong> <?php echo $_SESSION['role']; ?>
                 </p>
               </div>
           </div>
