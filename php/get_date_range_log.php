@@ -8,7 +8,7 @@ $sql = "
 
 SELECT *
 FROM logs_tbl
-WHERE time BETWEEN '$startDate 00:00:00' AND '$endDate 23:59:00';
+WHERE time BETWEEN '$startDate' AND '$endDate';
 
 ";
 

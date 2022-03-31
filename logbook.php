@@ -58,7 +58,6 @@ mysqli_close($conn);
   <link rel="stylesheet" href="DataTables/datatables.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link href="css/master.css" rel="stylesheet" />
-  <link href="css/logbook.css" rel="stylesheet" />
 
   <!-- setup log permission -->
   <script type="text/javascript">
@@ -132,25 +131,16 @@ mysqli_close($conn);
           <div class="page-title">
             <h3>
               Logbook
-              <!-- <a
-                  id="add-log-button"
-                  href="#"
-                  class="btn btn-sm btn-outline-primary float-right"
-                  ><i class="fas fa-file-alt"></i> Add Log</a
-                > -->
+              <!-- <a id="add-log-button" href="#" class="btn btn-sm btn-outline-primary float-right"><i class="fas fa-file-alt"></i> Add Log</a> -->
             </h3>
           </div>
           <div class="row mb-3">
-            <div class="col-md-12">
-              <h5>Select start date and end date to show log</h5>
-              <input type="text" name="daterange" size="25" value="
-              <?php
-              date_default_timezone_set('Asia/Manila');
-              $today = date("m/d/Y");
-              $tomorrow = date("m-d-Y", strtotime('tomorrow'));
-              $dateRange = $today . " - " . $tomorrow;
-              echo $dateRange;
-              ?>" />
+            <div class="col-md-6">
+              <h5>Date and Time Range Picker</h5>
+              <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <i class="fa fa-calendar"></i>&nbsp;
+                <span></span> <i class="fa fa-caret-down"></i>
+              </div>
             </div>
           </div>
           <div class="row mb-4">
@@ -198,7 +188,7 @@ mysqli_close($conn);
         <div class="modal-body">
           <div class="d-flex justify-content-center">
             <!-- set ko na size dito sa html para kahit dito na iset -->
-            <img id="selfie-img" src="img/boji.png" class="rotated" width="200" height="200" />
+            <img id="selfie-img" src="php/imageupload/selfie_image.png" alt="Visitors Selfie" width="200" height="200" />
           </div>
           <form>
             <input id="edited-id" name="edited-id" type="hidden" />

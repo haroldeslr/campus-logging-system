@@ -8,6 +8,12 @@ function getTodaysLog() {
     .then((response) => {
       let logData = [];
       for (let i = 0; i < response.length; i++) {
+        // convert time to 12 hour format
+        let dateAndTime = response[i].time;
+        let date = dateAndTime.substring(0, 10);
+        let time = dateAndTime.substr(dateAndTime.length - 8);
+        dateAndTime = date + " " + moment(time, "HH:mm:ss").format("hh:mm A");
+
         let data = {
           id: response[i].id,
           full_name: response[i].full_name,
@@ -19,7 +25,7 @@ function getTodaysLog() {
           reason: response[i].reason,
           selected_buildings: response[i].selected_buildings,
           image_name: response[i].image_name,
-          time: response[i].time,
+          time: dateAndTime,
         };
         logData.push(data);
       }
@@ -36,7 +42,7 @@ function initializeDatetalbe(logData) {
       {
         extend: "print",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
         },
       },
     ],
@@ -54,7 +60,6 @@ function initializeDatetalbe(logData) {
       { data: "reason" },
       { data: "selected_buildings" },
       { data: "contact_number" },
-
       {
         data: "id",
         render: function (data, type, row, meta) {
@@ -145,7 +150,17 @@ $(document).on("click", ".edit-log-button", function () {
       // load image
       let baseURL = "https://pucls.000webhostapp.com/php/imageupload/";
       let imageName = json.image_name;
-      $("#selfie-img").prop("src", baseURL + imageName);
+
+      $.ajax({
+        url: baseURL + imageName,
+        type: "HEAD",
+        success: function () {
+          $("#selfie-img").prop("src", baseURL + imageName);
+        },
+        error: function () {
+          $("#selfie-img").prop("src", "php/imageupload/selfie_image.png");
+        },
+      });
     },
   });
 
@@ -269,17 +284,71 @@ function updateSingleRowInTable(logData) {
 }
 // edit log script
 
-// date picker
+// date range picker
 $(function () {
-  $('input[name="daterange"]').daterangepicker(
+  var start = moment().set({ hour: 01, minute: 00, second: 00 });
+  var end = moment().set({ hour: 23, minute: 59, second: 59 });
+
+  function cb(start, end) {
+    $("#reportrange span").html(
+      start.format("MMMM D, YYYY   hh-mm A") +
+        "  -  " +
+        end.format("MMMM D, YYYY   hh-mm A")
+    );
+
+    getDateTargetLogs(
+      start.format("YYYY:MM:DD HH:mm:ss"),
+      end.format("YYYY:MM:DD HH:mm:ss")
+    );
+  }
+
+  $("#reportrange").daterangepicker(
     {
-      opens: "left",
+      timePicker: true,
+      startDate: start,
+      endDate: end,
+      ranges: {
+        Today: [
+          moment().set({ hour: 01, minute: 00, second: 00 }),
+          moment().set({ hour: 23, minute: 59, second: 59 }),
+        ],
+        Yesterday: [
+          moment()
+            .subtract(1, "days")
+            .set({ hour: 01, minute: 00, second: 00 }),
+          moment()
+            .subtract(1, "days")
+            .set({ hour: 23, minute: 59, second: 59 }),
+        ],
+        "Last 7 Days": [
+          moment()
+            .subtract(6, "days")
+            .set({ hour: 01, minute: 00, second: 00 }),
+          moment().set({ hour: 23, minute: 59, second: 59 }),
+        ],
+        "Last 30 Days": [
+          moment()
+            .subtract(29, "days")
+            .set({ hour: 01, minute: 00, second: 00 }),
+          moment().set({ hour: 23, minute: 59, second: 59 }),
+        ],
+        "This Month": [
+          moment().startOf("month").set({ hour: 01, minute: 00, second: 00 }),
+          moment().endOf("month").set({ hour: 23, minute: 59, second: 59 }),
+        ],
+        "Last Month": [
+          moment()
+            .subtract(1, "month")
+            .startOf("month")
+            .set({ hour: 01, minute: 00, second: 00 }),
+          moment()
+            .subtract(1, "month")
+            .endOf("month")
+            .set({ hour: 23, minute: 59, second: 59 }),
+        ],
+      },
     },
-    function (start, end, label) {
-      let startDate = start.format("YYYY-MM-DD");
-      let endDate = end.format("YYYY-MM-DD");
-      getDateTargetLogs(startDate, endDate);
-    }
+    cb
   );
 });
 
@@ -292,6 +361,12 @@ function getDateTargetLogs(startDate, endDate) {
       let response = JSON.parse(data);
       let logData = [];
       for (let i = 0; i < response.length; i++) {
+        // convert time to 12 hour format
+        let dateAndTime = response[i].time;
+        let date = dateAndTime.substring(0, 10);
+        let time = dateAndTime.substr(dateAndTime.length - 8);
+        dateAndTime = date + " " + moment(time, "HH:mm:ss").format("hh:mm A");
+
         let data = {
           id: response[i].id,
           full_name: response[i].full_name,
@@ -301,7 +376,8 @@ function getDateTargetLogs(startDate, endDate) {
           temperature: response[i].temperature,
           gender: response[i].gender,
           reason: response[i].reason,
-          time: response[i].time,
+          selected_buildings: response[i].selected_buildings,
+          time: dateAndTime,
         };
         logData.push(data);
       }
@@ -316,3 +392,4 @@ function displayDateTargetLogs(logData) {
   table.rows.add(logData);
   table.draw();
 }
+// date range picker

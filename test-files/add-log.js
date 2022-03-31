@@ -2972,21 +2972,8 @@ function generateTime() {
   let minute = date.getMinutes();
   let second = date.getSeconds();
 
-  let years = ["2018", "2019", "2020", "2021", "2022"];
-  let months = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-  ];
+  let years = ["2022"];
+  let months = ["01", "02", "03"];
   let days = [
     "01",
     "02",
@@ -3017,15 +3004,17 @@ function generateTime() {
     "27",
     "28",
     "29",
+    "30",
+    "31",
   ];
 
-  let randomNumber = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
+  let randomNumber = 0;
   let year = years[randomNumber];
 
-  randomNumber = Math.floor(Math.random() * (11 - 0 + 1)) + 0;
-  let month = months[randomNumber];
+  randomNumber = Math.floor(Math.random() * 3);
+  let month = 03;
 
-  randomNumber = Math.floor(Math.random() * (28 - 0 + 1)) + 0;
+  randomNumber = Math.floor(Math.random() * 31);
   let day = days[randomNumber];
 
   let currentDate =
@@ -3041,6 +3030,7 @@ function addLog() {
   let contactnumber = generateContactNumber();
   let temperature = generateTemperature();
   let reason = generateReason();
+  let selectedBuildings = "PTC, MBA HALL, FACULTY CENTER";
   let time = generateTime();
 
   $.ajax({
@@ -3053,6 +3043,7 @@ function addLog() {
       contactnumber: contactnumber,
       temperature: temperature,
       reason: reason,
+      selectedbuildings: selectedBuildings,
       time: time,
     },
     type: "post",
@@ -3062,7 +3053,7 @@ function addLog() {
 
       if (status == "true") {
       } else {
-        alert("Add Log Failed");
+        console.log(status);
       }
     },
   });
