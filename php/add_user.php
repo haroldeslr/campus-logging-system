@@ -5,7 +5,6 @@ $email = $_POST['email'];
 $username = $_POST['username'];
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 $fullname = $_POST['fullname'];
-$type = $_POST['type'];
 $role = $_POST['role'];
 $code = 0;
 $status = "verified";
@@ -19,7 +18,7 @@ if (mysqli_num_rows($result) > 0) {
     );
     echo json_encode($data);
 } else {
-    $sql = "INSERT INTO user_tbl (username, email, password, fullname, role, type, code, status) VALUES ('$username', '$email', '$password', '$fullname', '$role', '$type', $code, '$status');";
+    $sql = "INSERT INTO user_tbl (username, email, password, fullname, role, code, status) VALUES ('$username', '$email', '$password', '$fullname', '$role', $code, '$status');";
 
     if ($conn->query($sql) === TRUE) {
         $data = array(

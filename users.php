@@ -233,12 +233,10 @@ mysqli_close($conn);
                             <label for="edit-fullname-input">Fullname</label>
                             <input type="text" class="form-control" maxlength="70" id="edit-fullname-input" placeholder="Full Name" required>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="edit-role-select">Department</label>
-                                <select class="form-control" id="edit-role-select" required>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="edit-role-select">Department</label>
+                            <select class="form-control" id="edit-role-select" required>
+                            </select>
                         </div>
                     </form>
                 </div>

@@ -107,7 +107,6 @@ function getAddUserFormValues() {
   let username = $("#username-input").val();
   let password = $("#password-input").val();
   let fullname = $("#fullname-input").val();
-  let type = $("#type-input").val();
   let role = $("#role-select").val();
 
   let addUserFormValue = {
@@ -115,7 +114,6 @@ function getAddUserFormValues() {
     username: username,
     password: password,
     fullname: fullname,
-    type: type,
     role: role,
   };
 
@@ -135,8 +133,6 @@ function validateAddUserForm(addUserFormValue) {
     addUserFormValue.password.length > 15 ||
     addUserFormValue.fullname === "" ||
     addUserFormValue.fullname.length > 70 ||
-    addUserFormValue.type === "" ||
-    addUserFormValue.type.length > 70 ||
     addUserFormValue.role === ""
   ) {
     addUserFormIsValid = false;
@@ -156,7 +152,6 @@ function saveUserToDatabase(addUserFormValue) {
       password: addUserFormValue.password,
       fullname: addUserFormValue.fullname,
       role: addUserFormValue.role,
-      type: addUserFormValue.type,
     },
     type: "post",
     success: function (data) {
@@ -200,7 +195,6 @@ function addUserToDatatable(userData) {
       username: userData.username,
       email: userData.email,
       role: userData.role,
-      type: userData.type,
       id: userData.id,
     })
     .draw()
@@ -229,7 +223,6 @@ $(document).on("click", ".edit-user-button", function () {
       $("#edited-id").val(id);
       $("#edit-username-input").val(userData.username);
       $("#edit-fullname-input").val(userData.fullname);
-      $("#edit-type-input").val(userData.type);
       updateEditRoleSelectOption(userData.role);
       oldUsername = userData.username;
       email = userData.email;
@@ -269,14 +262,12 @@ function getEditUserFormValues() {
   let id = $("#edited-id").val();
   let username = $("#edit-username-input").val();
   let fullname = $("#edit-fullname-input").val();
-  let type = $("#edit-type-input").val();
   let role = $("#edit-role-select").val();
 
   let editUserFormValues = {
     id: id,
     username: username,
     fullname: fullname,
-    type: type,
     role: role,
   };
 
@@ -291,8 +282,6 @@ function validateEditUserForm(editUserFormValues) {
     editUserFormValues.username.length > 70 ||
     editUserFormValues.fullname === "" ||
     editUserFormValues.fullname.length > 70 ||
-    editUserFormValues.type === "" ||
-    editUserFormValues.type.length > 70 ||
     editUserFormValues.role === ""
   ) {
     editUserFormIsValid = false;
@@ -310,7 +299,6 @@ function updateEditUserToDatabase(editUserFormValues) {
       id: editUserFormValues.id,
       username: editUserFormValues.username,
       fullname: editUserFormValues.fullname,
-      type: editUserFormValues.type,
       role: editUserFormValues.role,
       old_username: oldUsername,
     },
@@ -345,7 +333,6 @@ function updateSingleRowInTable(editUserFormValues) {
       fullname: editUserFormValues.fullname,
       email: email,
       role: editUserFormValues.role,
-      type: editUserFormValues.type,
       id: editUserFormValues.id,
     })
     .draw();
