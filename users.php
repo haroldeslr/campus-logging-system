@@ -150,7 +150,6 @@ mysqli_close($conn);
                                                 <th>Username</th>
                                                 <th>Email</th>
                                                 <th>Department</th>
-                                                <th>Type</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
