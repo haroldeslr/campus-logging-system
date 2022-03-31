@@ -4,22 +4,48 @@ $(document).ready(function () {
 
 // display all announcement
 function displayAllAnnouncement() {
-  fetch("php/get_all_announcement.php")
-    .then((res) => res.json())
-    .then((response) => {
-      let announcementsData = [];
-      for (let i = 0; i < response.length; i++) {
-        let data = {
-          id: response[i].id,
-          date: response[i].date,
-          title: response[i].title,
-          message: response[i].message,
-        };
-        announcementsData.push(data);
-      }
-      updateTable(announcementsData);
-    })
-    .catch((error) => console.log(error));
+  if (department != "Administrator") {
+    $.ajax({
+      url: "php/get_announcement_by_department.php",
+      data: {
+        department: department,
+      },
+      type: "post",
+      success: function (data) {
+        let response = JSON.parse(data);
+        let announcementsData = [];
+        for (let i = 0; i < response.length; i++) {
+          let data = {
+            id: response[i].id,
+            date: response[i].date,
+            title: response[i].title,
+            message: response[i].message,
+            department: response[i].department,
+          };
+          announcementsData.push(data);
+        }
+        updateTable(announcementsData);
+      },
+    });
+  } else {
+    fetch("php/get_all_announcement.php")
+      .then((res) => res.json())
+      .then((response) => {
+        let announcementsData = [];
+        for (let i = 0; i < response.length; i++) {
+          let data = {
+            id: response[i].id,
+            date: response[i].date,
+            title: response[i].title,
+            message: response[i].message,
+            department: response[i].department,
+          };
+          announcementsData.push(data);
+        }
+        updateTable(announcementsData);
+      })
+      .catch((error) => console.log(error));
+  }
 }
 
 function updateTable(announcementsData) {
@@ -34,6 +60,7 @@ function updateTable(announcementsData) {
       { data: "date" },
       { data: "title" },
       { data: "message" },
+      { data: "department" },
 
       {
         data: "id",
@@ -84,11 +111,13 @@ function getAddAnnouncementFormValue() {
   let date = $("#date-input").val();
   let title = $("#title-input").val();
   let message = $("#message-text-input").val();
+  let departments = department;
 
   let announcementValue = {
     date: date,
     title: title,
     message: message,
+    department: departments,
   };
 
   return announcementValue;
@@ -120,6 +149,7 @@ function saveAnnouncementToDatabase(announcementValue) {
       date: announcementValue.date,
       title: announcementValue.title,
       message: announcementValue.message,
+      department: announcementValue.department,
     },
     type: "post",
     success: function (data) {
@@ -146,6 +176,7 @@ function getNewAnnouncement(announcementValue) {
       date: announcementValue.date,
       title: announcementValue.title,
       message: announcementValue.message,
+      department: announcementValue.department,
     },
     type: "post",
     success: function (data) {
@@ -156,12 +187,14 @@ function getNewAnnouncement(announcementValue) {
 }
 
 function addAnnouncementToDatatable(announcementData) {
+  console.log(announcementData.department);
   let announcementTable = $("#announcement-table").DataTable();
   let rowNode = announcementTable.row
     .add({
       date: announcementData.date,
       title: announcementData.title,
       message: announcementData.message,
+      department: announcementData.department,
       id: announcementData.id,
     })
     .draw()
@@ -217,6 +250,7 @@ $(document).on("click", ".edit-announcement-button", function () {
       $("#edit-date-input").val(json.date);
       $("#edit-title-input").val(json.title);
       $("#edit-message-text-input").val(json.message);
+      $("#edit-announcement-department-input").val(json.department);
     },
   });
 
@@ -241,12 +275,14 @@ function getEditAnnouncementFormValues() {
   let date = $("#edit-date-input").val();
   let title = $("#edit-title-input").val();
   let message = $("#edit-message-text-input").val();
+  let department = $("#edit-announcement-department-input").val();
 
   let editAnnouncementFormValues = {
     id: id,
     date: date,
     title: title,
     message: message,
+    department: department,
   };
 
   return editAnnouncementFormValues;
@@ -306,6 +342,7 @@ function updateSingleRowInTable(announcementData) {
       date: announcementData.date,
       title: announcementData.title,
       message: announcementData.message,
+      department: announcementData.department,
       id: announcementData.id,
     })
     .draw();

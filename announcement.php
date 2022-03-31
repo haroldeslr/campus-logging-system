@@ -63,6 +63,7 @@ mysqli_close($conn);
   <script type="text/javascript">
     let editAnnouncement = <?php echo $_SESSION['edit_announcement'] ?>;
     let deleteAnnouncement = <?php echo $_SESSION['delete_announcement'] ?>;
+    let department = '<?php echo $_SESSION['role'] ?>';
   </script>
 </head>
 
@@ -182,23 +183,6 @@ mysqli_close($conn);
               <input id="date-input" type="date" class="form-control" name="date-input" />
             </div>
             <div class="form-group">
-              <label for="department" class="col-form-label">Department</label>
-              <select class="custom-select" aria-label=".form-select-lg example" name="edited-location" id="edited-location">
-                <option value="BASICED">BASIC ED</option>
-                <option value="CAS">CAS</option>
-                <option value="CEA">CEA</option>
-                <option value="CHS">CHS</option>
-                <option value="CITE">CITE</option>
-                <option value="CCJE">CCJE</option>
-                <option value="CELA">CELA</option>
-                <option value="GRAD SCHOOL">GRAD SCHOOL</option>
-                <option value="GSD">GSD</option>
-                <option value="Registrar">Registrar</option>
-                <option value="CSDL">CSDL</option>
-                <option value="Finance">Finance</option>
-              </select>
-            </div>
-            <div class="form-group">
               <label for="title-input" class="col-form-label">Title:</label>
               <input id="title-input" type="text" maxlength="70" class="form-control" name="title-input" />
             </div>
@@ -235,22 +219,9 @@ mysqli_close($conn);
               <label for="edit-date-input" class="col-form-label">Date:</label>
               <input id="edit-date-input" type="date" class="form-control" name="edit-date-input" />
             </div>
-             <div class="form-group">
-              <label for="department" class="col-form-label">Department</label>
-              <select class="custom-select" aria-label=".form-select-lg example" name="edited-location" id="edited-location">
-                <option value="BASICED">BASIC ED</option>
-                <option value="CAS">CAS</option>
-                <option value="CEA">CEA</option>
-                <option value="CHS">CHS</option>
-                <option value="CITE">CITE</option>
-                <option value="CCJE">CCJE</option>
-                <option value="CELA">CELA</option>
-                <option value="GRAD SCHOOL">GRAD SCHOOL</option>
-                <option value="GSD">GSD</option>
-                <option value="Registrar">Registrar</option>
-                <option value="CSDL">CSDL</option>
-                <option value="Finance">Finance</option>
-              </select>
+            <div class="form-group">
+              <label for="edit-announcement-department-input" class="col-form-label">Department:</label>
+              <input id="edit-announcement-department-input" type="text" maxlength="255" class="form-control" disabled />
             </div>
             <div class="form-group">
               <label for="edit-title-input" class="col-form-label">Title:</label>

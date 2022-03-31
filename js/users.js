@@ -14,7 +14,6 @@ function getAllUsers() {
           email: response[i].email,
           fullname: response[i].fullname,
           role: response[i].role,
-          type: response[i].type,
         };
         usersData.push(data);
       }
@@ -36,7 +35,6 @@ function initializeDatatable(usersData) {
       { data: "username" },
       { data: "email" },
       { data: "role" },
-      { data: "type" },
 
       {
         data: "id",

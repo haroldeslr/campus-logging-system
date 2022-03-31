@@ -4,8 +4,9 @@ require "connect_to_database.php";
 $date = $_POST['date'];
 $title = $_POST['title'];
 $message = $_POST['message'];
+$department = $_POST['department'];
 
-$sql = "INSERT INTO `announcements_tbl` (`date`, `title`, `message`) VALUES ('$date', '$title', '$message')";
+$sql = "INSERT INTO `announcements_tbl` (`date`, `title`, `message`, `department`) VALUES ('$date', '$title', '$message', '$department')";
 $query = mysqli_query($conn, $sql);
 
 if ($query == true) {
@@ -18,5 +19,4 @@ if ($query == true) {
         'status'=>'false',
     );
     echo json_encode($data);
-} 
-?>
+}

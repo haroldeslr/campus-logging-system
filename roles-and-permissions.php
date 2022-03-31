@@ -131,7 +131,7 @@ mysqli_close($conn);
                 <div class="container-fluid">
                     <div class="page-title">
                         <h3>
-                            Department Responsibilities Management
+                            Department Management
                             <?php
                             if ($_SESSION['add_roles_and_permissions'] == 1) {
                                 echo '<a href="roles.html" class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#add-roles-modal"><i class="fas fa-plus-circle"></i> Add</a>';

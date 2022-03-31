@@ -88,7 +88,7 @@ mysqli_close($conn);
                     <a href="users.php"><i class="fas fa-users"></i> Users</a>
                 </li>
                 <li>
-                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Roles & Permissions</a>
+                    <a href="roles-and-permissions.php"><i class="fas fa-user-shield"></i> Department Management</a>
                 </li>
                 <li>
                     <a href="account-profile.php"><i class="fas fa-user"></i> Account Profile</a>
@@ -195,16 +195,10 @@ mysqli_close($conn);
                             <label for="fullname-input">Full Name</label>
                             <input type="text" class="form-control" maxlength="70" id="fullname-input" placeholder="Full Name" required>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="type-input">Type</label>
-                                <input type="text" class="form-control" maxlength="70" name="type-input" id="type-input" placeholder="Type" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="role-select">Department</label>
-                                <select name="role-select" class="form-control" id="role-select" required>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="role-select">Department</label>
+                            <select name="role-select" class="form-control" id="role-select" required>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -240,10 +234,6 @@ mysqli_close($conn);
                             <input type="text" class="form-control" maxlength="70" id="edit-fullname-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="edit-type-input">Type</label>
-                                <input type="text" class="form-control" maxlength="70" id="edit-type-input" placeholder="Type" required>
-                            </div>
                             <div class="form-group col-md-6">
                                 <label for="edit-role-select">Department</label>
                                 <select class="form-control" id="edit-role-select" required>
