@@ -152,7 +152,7 @@ mysqli_close($conn);
                   <table class="table table-hover" id="logbook-table" width="100%">
                     <thead>
                       <tr>
-                        <th>Time</th>
+                        <th>Log in</th>
                         <th>Full Name</th>
                         <th>Address</th>
                         <th>Age</th>
@@ -161,6 +161,7 @@ mysqli_close($conn);
                         <th>Purpose</th>
                         <th>Target Location</th>
                         <th>Contact Number</th>
+                        <th>Log Out</th>
                         <th>Action</th>
                       </tr>
                     </thead>
