@@ -121,7 +121,27 @@ mysqli_close($conn);
           <div class="page-title">
             <h3>Dashboard</h3>
           </div>
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <h5>Report Management</h5>
+            </div>
+            <div class="col-md-3">
+              <button id="generate-daily-logs-btn" type="button" class="btn btn-info btn-lg mb-3 px-4"><i class="fa fa-lg fa-print"></i> Generate Daily Logs <br>Report</button>
+            </div>
+            <div class="col-md-3">
+              <button id="generate-weekly-logs-btn" type="button" class="btn btn-primary btn-lg mb-3 px-3"><i class="fa fa-lg fa-print"></i> Generate Weekly Logs <br>Report</button>
+            </div>
+            <div class="col-md-3">
+              <button id="generate-monthly-logs-btn" type="button" class="btn btn-warning btn-lg mb-3 px-2"><i class="fa fa-lg fa-print"></i> Generate Monthly Logs <br>Report</button>
+            </div>
+            <div class="col-md-3">
+              <button id="generate-yearly-logs-btn" type="button" class="btn btn-success btn-lg mb-4 px-4"><i class="fa fa-lg fa-print"></i> Generate Yealy Logs <br>Report</button>
+            </div>
+          </div>
           <div class="row mb-4">
+            <div class="col-md-12">
+              <h5>Charts</h5>
+            </div>
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header">Daily Visitors Chart</div>
@@ -170,6 +190,24 @@ mysqli_close($conn);
               </div>
             </div>
           </div>
+          <div class="row" style="display: none;">
+            <table class="table table-hover" id="generate-report-table" width="100%">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Full Name</th>
+                  <th>Address</th>
+                  <th>Age</th>
+                  <th>Temperature</th>
+                  <th>Gender</th>
+                  <th>Purpose</th>
+                  <th>Target Location</th>
+                  <th>Contact Number</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -178,6 +216,10 @@ mysqli_close($conn);
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+  <script src="DataTables/datatables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/solid.min.js" integrity="sha512-+KCv9G3MmyWnFnFrd2+/ccSx5ejo1yED85HZOvNDhtyHu2tuLL8df5BtaLXqsiF68wGLgxxMb4yL5oUyXjqSgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

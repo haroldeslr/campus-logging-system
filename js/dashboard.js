@@ -2,6 +2,9 @@ $(document).ready(function () {
   getYearlyLogStats();
   getMonthlyLogStats();
   getDailyLogStats();
+
+  let logData = [];
+  initializeDatetalbe();
 });
 
 // daily logs
@@ -413,3 +416,134 @@ function displayYearlyLogStats(
   $("#yearly-logs-loading-spinner").addClass("d-none");
 }
 // yearly logs
+
+// datatable script
+$(document).on("click", "#generate-daily-logs-btn", function () {
+  getTodaysLog();
+});
+
+$(document).on("click", "#generate-weekly-logs-btn", function () {
+  getWeeklyLogs();
+});
+
+$(document).on("click", "#generate-monthly-logs-btn", function () {
+  getMonthlyLogs();
+});
+
+$(document).on("click", "#generate-yearly-logs-btn", function () {
+  getYearlyLogs();
+});
+
+function initializeDatetalbe(logData) {
+  $("#generate-report-table").DataTable({
+    data: logData,
+    dom: "Bfrtip",
+    buttons: [
+      {
+        extend: "print",
+        text: "Print",
+      },
+    ],
+    responsive: true,
+    pageLength: 100,
+    searching: true,
+    ordering: true,
+    columns: [
+      { data: "time" },
+      { data: "full_name" },
+      { data: "address" },
+      { data: "age" },
+      { data: "temperature" },
+      { data: "gender" },
+      { data: "reason" },
+      { data: "selected_buildings" },
+      { data: "contact_number" },
+    ],
+  });
+}
+
+// get weekly logs
+function getTodaysLog() {
+  let start = moment().set({ hour: 01, minute: 00, second: 00 });
+  let end = moment().set({ hour: 23, minute: 59, second: 59 });
+  getDateTargetLogs(
+    start.format("YYYY:MM:DD HH:mm:ss"),
+    end.format("YYYY:MM:DD HH:mm:ss")
+  );
+}
+
+function getWeeklyLogs() {
+  let start = moment()
+    .subtract(6, "days")
+    .set({ hour: 01, minute: 00, second: 00 });
+  let end = moment().set({ hour: 23, minute: 59, second: 59 });
+  getDateTargetLogs(
+    start.format("YYYY:MM:DD HH:mm:ss"),
+    end.format("YYYY:MM:DD HH:mm:ss")
+  );
+}
+
+function getMonthlyLogs() {
+  let start = moment()
+    .subtract(29, "days")
+    .set({ hour: 01, minute: 00, second: 00 });
+  let end = moment().set({ hour: 23, minute: 59, second: 59 });
+  getDateTargetLogs(
+    start.format("YYYY:MM:DD HH:mm:ss"),
+    end.format("YYYY:MM:DD HH:mm:ss")
+  );
+}
+
+function getYearlyLogs() {
+  let start = moment()
+    .subtract(12, "months")
+    .set({ hour: 01, minute: 00, second: 00 });
+  let end = moment().set({ hour: 23, minute: 59, second: 59 });
+  getDateTargetLogs(
+    start.format("YYYY:MM:DD HH:mm:ss"),
+    end.format("YYYY:MM:DD HH:mm:ss")
+  );
+}
+
+function getDateTargetLogs(startDate, endDate) {
+  $.ajax({
+    url: "php/get_date_range_log.php",
+    data: { startDate: startDate, endDate: endDate },
+    type: "post",
+    success: function (data) {
+      let response = JSON.parse(data);
+      let logData = [];
+      for (let i = 0; i < response.length; i++) {
+        // convert time to 12 hour format
+        let dateAndTime = response[i].time;
+        let date = dateAndTime.substring(0, 10);
+        let time = dateAndTime.substr(dateAndTime.length - 8);
+        //dateAndTime = date + " " + moment(time, "HH:mm:ss").format("hh:mm A");
+
+        let data = {
+          id: response[i].id,
+          full_name: response[i].full_name,
+          contact_number: response[i].contact_number,
+          address: response[i].address,
+          age: response[i].age,
+          temperature: response[i].temperature,
+          gender: response[i].gender,
+          reason: response[i].reason,
+          selected_buildings: response[i].selected_buildings,
+          time: dateAndTime,
+        };
+        logData.push(data);
+      }
+      displayDateTargetLogs(logData);
+    },
+  });
+}
+
+function displayDateTargetLogs(logData) {
+  let table = $("#generate-report-table").DataTable();
+  table.clear();
+  table.rows.add(logData);
+  table.draw();
+
+  $(".buttons-print")[0].click();
+}
